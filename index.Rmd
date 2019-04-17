@@ -1,0 +1,5 @@
+---
+title: "CSC405 Project Blog"
+site: distill::distill_website
+listing: posts
+---
