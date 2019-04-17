@@ -1,0 +1,67 @@
+---
+title: "Project Blog"
+description: |
+  CSC405 Project Blog
+author:
+  - name: Reagan Atchison
+    url: 
+date: 04-17-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(mdsr)
+library(tidyverse)
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+## Introduction
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium fusce id velit ut. Tortor at auctor urna nunc id cursus metus aliquam. Donec adipiscing tristique risus nec feugiat in fermentum. Sodales ut eu sem integer vitae justo. Lobortis feugiat vivamus at augue eget. Ante metus dictum at tempor. Tortor at risus viverra adipiscing at. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Cras sed felis eget velit. Nisi est sit amet facilisis magna etiam tempor orci eu. Amet nisl suscipit adipiscing bibendum est ultricies integer. In hac habitasse platea dictumst. Cras fermentum odio eu feugiat pretium.
+
+Tincidunt arcu non sodales neque sodales. Ullamcorper dignissim cras tincidunt lobortis feugiat. Arcu ac tortor dignissim convallis aenean et tortor at risus. Sapien et ligula ullamcorper malesuada proin. Ac tincidunt vitae semper quis lectus nulla at. Malesuada proin libero nunc consequat interdum. In metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Auctor augue mauris augue neque gravida. Amet tellus cras adipiscing enim eu. Orci sagittis eu volutpat odio. Nisl nunc mi ipsum faucibus vitae aliquet nec. Imperdiet nulla malesuada pellentesque elit eget gravida. Nunc vel risus commodo viverra maecenas accumsan. Auctor eu augue ut lectus arcu. Nibh cras pulvinar mattis nunc sed blandit.
+
+Eget egestas purus viverra accumsan in nisl nisi. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat. Eu tincidunt tortor aliquam nulla facilisi cras fermentum. Sed adipiscing diam donec adipiscing tristique risus. Eu sem integer vitae justo eget magna fermentum iaculis. Habitant morbi tristique senectus et netus et malesuada fames ac. Mauris commodo quis imperdiet massa. Molestie ac feugiat sed lectus vestibulum. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Aenean sed adipiscing diam donec adipiscing tristique. Viverra nam libero justo laoreet. Amet facilisis magna etiam tempor orci eu. Nunc lobortis mattis aliquam faucibus purus in massa tempor. Ullamcorper morbi tincidunt ornare massa. Odio morbi quis commodo odio aenean. Malesuada proin libero nunc consequat. Et leo duis ut diam. Massa tincidunt nunc pulvinar sapien et ligula.
+
+Gravida arcu ac tortor dignissim convallis aenean. Fermentum et sollicitudin ac orci phasellus. Tortor pretium viverra suspendisse potenti nullam. Ornare quam viverra orci sagittis. Et odio pellentesque diam volutpat. Sed tempus urna et pharetra pharetra massa massa. Ridiculus mus mauris vitae ultricies leo integer malesuada nunc. Eleifend quam adipiscing vitae proin. Cursus euismod quis viverra nibh cras pulvinar. Bibendum est ultricies integer quis auctor.
+
+Consequat mauris nunc congue nisi vitae suscipit tellus mauris. Morbi tristique senectus et netus et malesuada fames ac turpis. Auctor urna nunc id cursus metus. Aliquam sem fringilla ut morbi. Mattis vulputate enim nulla aliquet porttitor lacus. Dui vivamus arcu felis bibendum ut tristique et egestas. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Cras semper auctor neque vitae tempus. Vitae aliquet nec ullamcorper sit amet risus. Orci ac auctor augue mauris augue neque gravida in. Adipiscing bibendum est ultricies integer quis auctor elit. Pharetra vel turpis nunc eget lorem dolor. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Sit amet est placerat in egestas erat imperdiet sed euismod. Turpis massa tincidunt dui ut ornare lectus sit amet est. Nisl nisi scelerisque eu ultrices vitae auctor. Nulla pharetra diam sit amet.
+
+## Analysis
+
+Here's a plot...
+
+```{r preview = TRUE}
+ggplot(iris, aes(x = Sepal.Width, y = Petal.Length)) +
+  geom_point(aes(color = Species))
+```
+
+
+Here's a table...
+
+```{r}
+iris %>%
+  group_by(Species) %>% 
+  summarize(mean_Petal_Length = mean(Petal.Length)) %>% 
+  rmarkdown::paged_table()
+```
+
+
+## Conclusion
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium fusce id velit ut. Tortor at auctor urna nunc id cursus metus aliquam. Donec adipiscing tristique risus nec feugiat in fermentum. Sodales ut eu sem integer vitae justo. Lobortis feugiat vivamus at augue eget. Ante metus dictum at tempor. Tortor at risus viverra adipiscing at. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Cras sed felis eget velit. Nisi est sit amet facilisis magna etiam tempor orci eu. Amet nisl suscipit adipiscing bibendum est ultricies integer. In hac habitasse platea dictumst. Cras fermentum odio eu feugiat pretium.
+
+Tincidunt arcu non sodales neque sodales. Ullamcorper dignissim cras tincidunt lobortis feugiat. Arcu ac tortor dignissim convallis aenean et tortor at risus. Sapien et ligula ullamcorper malesuada proin. Ac tincidunt vitae semper quis lectus nulla at. Malesuada proin libero nunc consequat interdum. In metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Auctor augue mauris augue neque gravida. Amet tellus cras adipiscing enim eu. Orci sagittis eu volutpat odio. Nisl nunc mi ipsum faucibus vitae aliquet nec. Imperdiet nulla malesuada pellentesque elit eget gravida. Nunc vel risus commodo viverra maecenas accumsan. Auctor eu augue ut lectus arcu. Nibh cras pulvinar mattis nunc sed blandit.
+
+Eget egestas purus viverra accumsan in nisl nisi. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat. Eu tincidunt tortor aliquam nulla facilisi cras fermentum. Sed adipiscing diam donec adipiscing tristique risus. Eu sem integer vitae justo eget magna fermentum iaculis. Habitant morbi tristique senectus et netus et malesuada fames ac. Mauris commodo quis imperdiet massa. Molestie ac feugiat sed lectus vestibulum. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Aenean sed adipiscing diam donec adipiscing tristique. Viverra nam libero justo laoreet. Amet facilisis magna etiam tempor orci eu. Nunc lobortis mattis aliquam faucibus purus in massa tempor. Ullamcorper morbi tincidunt ornare massa. Odio morbi quis commodo odio aenean. Malesuada proin libero nunc consequat. Et leo duis ut diam. Massa tincidunt nunc pulvinar sapien et ligula.
+
+Gravida arcu ac tortor dignissim convallis aenean. Fermentum et sollicitudin ac orci phasellus. Tortor pretium viverra suspendisse potenti nullam. Ornare quam viverra orci sagittis. Et odio pellentesque diam volutpat. Sed tempus urna et pharetra pharetra massa massa. Ridiculus mus mauris vitae ultricies leo integer malesuada nunc. Eleifend quam adipiscing vitae proin. Cursus euismod quis viverra nibh cras pulvinar. Bibendum est ultricies integer quis auctor.
+
+Consequat mauris nunc congue nisi vitae suscipit tellus mauris. Morbi tristique senectus et netus et malesuada fames ac turpis. Auctor urna nunc id cursus metus. Aliquam sem fringilla ut morbi. Mattis vulputate enim nulla aliquet porttitor lacus. Dui vivamus arcu felis bibendum ut tristique et egestas. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Cras semper auctor neque vitae tempus. Vitae aliquet nec ullamcorper sit amet risus. Orci ac auctor augue mauris augue neque gravida in. Adipiscing bibendum est ultricies integer quis auctor elit. Pharetra vel turpis nunc eget lorem dolor. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Sit amet est placerat in egestas erat imperdiet sed euismod. Turpis massa tincidunt dui ut ornare lectus sit amet est. Nisl nisi scelerisque eu ultrices vitae auctor. Nulla pharetra diam sit amet.
