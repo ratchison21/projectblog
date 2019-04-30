@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+  <!--radix_placeholder_meta_tags-->
+<title>CSC405 Project Blog: Wildcards in the Bash Shell</title>
+
+<meta property="description" itemprop="description" content="CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time."/>
+
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2019-04-30"/>
+<meta property="article:created" itemprop="dateCreated" content="2019-04-30"/>
+<meta name="article:author" content="Reagan Atchison"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="CSC405 Project Blog: Wildcards in the Bash Shell"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="CSC405 Project Blog"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary"/>
+<meta property="twitter:title" content="CSC405 Project Blog: Wildcards in the Bash Shell"/>
+<meta property="twitter:description" content="CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time."/>
+
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Wildcards in the Bash Shell"]},{"type":"character","attributes":{},"value":["CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Reagan Atchison"]},{"type":"NULL"}]}]},{"type":"character","attributes":{},"value":["04-30-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["2019-04-17-project-blog/project-blog_files/bowser-1.9.3/bowser.min.js","2019-04-17-project-blog/project-blog_files/distill-2.2.21/template.v2.js","2019-04-17-project-blog/project-blog_files/figure-html5/unnamed-chunk-1-1.png","2019-04-17-project-blog/project-blog_files/jquery-1.11.3/jquery.min.js","2019-04-17-project-blog/project-blog_files/pagedtable-1.1/css/pagedtable.css","2019-04-17-project-blog/project-blog_files/pagedtable-1.1/js/pagedtable.js","2019-04-17-project-blog/project-blog_files/webcomponents-2.0.0/webcomponents.js","2019-04-17-project-blog/project-blog.html","2019-04-17-project-blog/project-blog.Rmd","mydir/example1/aliceblue_grape.R","mydir/example1/antiquewhite_strawberry.R","mydir/example1/antiquewhite1_kiwi_fruit.R","mydir/example1/antiquewhite2_boysenberry.R","mydir/example1/antiquewhite3_mandarine.R","mydir/example1/antiquewhite4_jujube.R","mydir/example1/aquamarine_rock_melon.R","mydir/example1/aquamarine1_bilberry.R","mydir/example1/aquamarine2_jujube.R","mydir/example1/aquamarine3_cloudberry.R","mydir/example1/aquamarine4_bilberry.R","mydir/example1/azure_strawberry.R","mydir/example1/azure1_mulberry.R","mydir/example1/azure2_strawberry.R","mydir/example1/azure3_satsuma.R","mydir/example1/azure4_bell_pepper.R","mydir/example1/beige_lychee.R","mydir/example1/bisque_mandarine.R","mydir/example1/bisque1_bilberry.R","mydir/example1/bisque2_peach.R","mydir/example1/bisque3_purple_mangosteen.R","mydir/example1/bisque4_mango.R","mydir/example1/black_plum.R","mydir/example1/blanchedalmond_kumquat.R","mydir/example1/blue_quince.R","mydir/example1/blue1_quince.R","mydir/example1/blue2_jambul.R","mydir/example1/blue3_goji_berry.R","mydir/example1/blue4_gooseberry.R","mydir/example1/blueviolet_cucumber.R","mydir/example1/brown_lychee.R","mydir/example1/brown1_ugli_fruit.R","mydir/example1/brown2_grapefruit.R","mydir/example1/brown3_cloudberry.R","mydir/example1/brown4_lime.R","mydir/example1/burlywood_honeydew.R","mydir/example1/burlywood1_cucumber.R","mydir/example1/burlywood2_feijoa.R","mydir/example1/burlywood3_bell_pepper.R","mydir/example1/burlywood4_grape.R","mydir/example1/cadetblue_pomelo.R","mydir/example1/cadetblue1_fig.R","mydir/example1/cadetblue2_blackcurrant.R","mydir/example1/cadetblue3_chili_pepper.R","mydir/example1/cadetblue4_peach.R","mydir/example1/chartreuse_jambul.R","mydir/example1/chartreuse1_persimmon.R","mydir/example1/chartreuse2_bell_pepper.R","mydir/example1/chartreuse3_blood_orange.R","mydir/example1/chartreuse4_clementine.R","mydir/example1/chocolate_grapefruit.R","mydir/example1/chocolate1_star_fruit.R","mydir/example1/chocolate2_fig.R","mydir/example1/chocolate3_peach.R","mydir/example1/chocolate4_raisin.R","mydir/example1/coral_olive.R","mydir/example1/coral1_damson.R","mydir/example1/coral2_dragonfruit.R","mydir/example1/coral3_watermelon.R","mydir/example1/coral4_breadfruit.R","mydir/example1/cornflowerblue_bilberry.R","mydir/example1/cornsilk_boysenberry.R","mydir/example1/cornsilk1_olive.R","mydir/example1/cornsilk2_blueberry.R","mydir/example1/cornsilk3_chili_pepper.R","mydir/example1/cornsilk4_papaya.R","mydir/example1/cyan_nut.R","mydir/example1/cyan1_cantaloupe.R","mydir/example1/cyan2_damson.R","mydir/example1/cyan3_peach.R","mydir/example1/cyan4_cucumber.R","mydir/example1/darkblue_dragonfruit.R","mydir/example1/darkcyan_goji_berry.R","mydir/example1/darkgoldenrod_rambutan.R","mydir/example1/darkgoldenrod1_date.R","mydir/example1/darkgoldenrod2_mango.R","mydir/example1/darkgoldenrod3_salal_berry.R","mydir/example1/darkgoldenrod4_clementine.R","mydir/example1/darkgray_lemon.R","mydir/example1/darkgreen_bell_pepper.R","mydir/example1/darkgrey_apple.R","mydir/example1/darkkhaki_blackberry.R","mydir/example1/darkmagenta_grape.R","mydir/example1/darkolivegreen_rambutan.R","mydir/example1/darkolivegreen1_physalis.R","mydir/example1/darkolivegreen2_apricot.R","mydir/example1/darkolivegreen3_grape.R","mydir/example1/darkolivegreen4_date.R","mydir/example1/darkorange_lemon.R","mydir/example1/darkorange1_boysenberry.R","mydir/example1/darkorange2_persimmon.R","mydir/example1/darkorange3_loquat.R","mydir/example1/darkorange4_tangerine.R","mydir/example1/darkorchid_gooseberry.R","mydir/example1/darkorchid1_cherry.R","mydir/example1/darkorchid2_avocado.R","mydir/example1/darkorchid3_canary_melon.R","mydir/example1/darkorchid4_bell_pepper.R","mydir/example1/darkred_guava.R","mydir/example1/darksalmon_goji_berry.R","mydir/example1/darkseagreen_grape.R","mydir/example1/darkseagreen1_peach.R","mydir/example1/darkseagreen2_apricot.R","mydir/example1/darkseagreen3_durian.R","mydir/example1/darkseagreen4_quince.R","mydir/example1/darkslateblue_redcurrant.R","mydir/example1/darkslategray_lime.R","mydir/example1/darkslategray1_raisin.R","mydir/example1/darkslategray2_apricot.R","mydir/example1/darkslategray3_kiwi_fruit.R","mydir/example1/darkslategray4_date.R","mydir/example1/darkslategrey_gooseberry.R","mydir/example1/darkturquoise_feijoa.R","mydir/example1/darkviolet_cloudberry.R","mydir/example1/deeppink_damson.R","mydir/example1/deeppink1_feijoa.R","mydir/example1/deeppink2_canary_melon.R","mydir/example1/deeppink3_mandarine.R","mydir/example1/deeppink4_apricot.R","mydir/example1/deepskyblue_satsuma.R","mydir/example1/deepskyblue1_breadfruit.R","mydir/example1/deepskyblue2_plum.R","mydir/example1/deepskyblue3_coconut.R","mydir/example1/deepskyblue4_bell_pepper.R","mydir/example1/dimgray_plum.R","mydir/example1/dimgrey_physalis.R","mydir/example1/dodgerblue_fig.R","mydir/example1/dodgerblue1_mango.R","mydir/example1/dodgerblue2_mango.R","mydir/example1/dodgerblue3_cantaloupe.R","mydir/example1/dodgerblue4_blackcurrant.R","mydir/example1/file_a.txt","mydir/example1/file_b.txt","mydir/example1/file_c.txt","mydir/example1/file_d.txt","mydir/example1/file_e.txt","mydir/example1/file_f.txt","mydir/example1/file_g.txt","mydir/example1/file_h.txt","mydir/example1/file_i.txt","mydir/example1/file_j.txt","mydir/example1/file_k.txt","mydir/example1/file_l.txt","mydir/example1/file_m.txt","mydir/example1/file_n.txt","mydir/example1/file_o.txt","mydir/example1/file_p.txt","mydir/example1/file_q.txt","mydir/example1/file_r.txt","mydir/example1/file_s.txt","mydir/example1/file_t.txt","mydir/example1/file_u.txt","mydir/example1/file_v.txt","mydir/example1/file_w.txt","mydir/example1/file_x.txt","mydir/example1/file_y.txt","mydir/example1/file_z.txt","mydir/example1/firebrick_physalis.R","mydir/example1/firebrick1_cucumber.R","mydir/example1/firebrick2_pamelo.R","mydir/example1/firebrick3_satsuma.R","mydir/example1/firebrick4_lemon.R","mydir/example1/floralwhite_cranberry.R","mydir/example1/forestgreen_apricot.R","mydir/example1/gainsboro_passionfruit.R","mydir/example1/ghostwhite_pomelo.R","mydir/example1/gold_pamelo.R","mydir/example1/gold1_kumquat.R","mydir/example1/gold2_feijoa.R","mydir/example1/gold3_grapefruit.R","mydir/example1/gold4_goji_berry.R","mydir/example1/goldenrod_kumquat.R","mydir/example1/goldenrod1_loquat.R","mydir/example1/goldenrod2_kiwi_fruit.R","mydir/example1/goldenrod3_dragonfruit.R","mydir/example1/goldenrod4_plum.R","mydir/example1/gray_lime.R","mydir/example1/gray0_guava.R","mydir/example1/gray1_elderberry.R","mydir/example1/gray10_physalis.R","mydir/example1/gray100_purple_mangosteen.R","mydir/example1/gray11_gooseberry.R","mydir/example1/gray12_raspberry.R","mydir/example1/gray13_lime.R","mydir/example1/gray14_raspberry.R","mydir/example1/gray15_lychee.R","mydir/example1/gray16_papaya.R","mydir/example1/gray17_eggplant.R","mydir/example1/gray18_cucumber.R","mydir/example1/gray19_cantaloupe.R","mydir/example1/gray2_blueberry.R","mydir/example1/gray20_cantaloupe.R","mydir/example1/gray21_honeydew.R","mydir/example1/gray22_lychee.R","mydir/example1/gray23_physalis.R","mydir/example1/gray24_pear.R","mydir/example1/gray25_bilberry.R","mydir/example1/gray26_date.R","mydir/example1/gray27_eggplant.R","mydir/example1/gray28_cloudberry.R","mydir/example1/gray29_pomelo.R","mydir/example1/gray3_satsuma.R","mydir/example1/gray30_goji_berry.R","mydir/example1/gray31_nectarine.R","mydir/example1/gray32_peach.R","mydir/example1/gray33_kumquat.R","mydir/example1/gray34_pineapple.R","mydir/example1/gray35_raisin.R","mydir/example1/gray36_cranberry.R","mydir/example1/gray37_boysenberry.R","mydir/example1/gray38_apple.R","mydir/example1/gray39_tangerine.R","mydir/example1/gray4_jambul.R","mydir/example1/gray40_lemon.R","mydir/example1/gray41_star_fruit.R","mydir/example1/gray42_pamelo.R","mydir/example1/gray43_bell_pepper.R","mydir/example1/gray44_gooseberry.R","mydir/example1/gray45_durian.R","mydir/example1/gray46_satsuma.R","mydir/example1/gray47_plum.R","mydir/example1/gray48_tangerine.R","mydir/example1/gray49_grapefruit.R","mydir/example1/gray5_pomelo.R","mydir/example1/gray50_jambul.R","mydir/example1/gray51_orange.R","mydir/example1/gray52_elderberry.R","mydir/example1/gray53_honeydew.R","mydir/example1/gray54_cherry.R","mydir/example1/gray55_loquat.R","mydir/example1/gray56_breadfruit.R","mydir/example1/gray57_apple.R","mydir/example1/gray58_huckleberry.R","mydir/example1/gray59_tamarillo.R","mydir/example1/gray6_cherry.R","mydir/example1/gray60_peach.R","mydir/example1/gray61_watermelon.R","mydir/example1/gray62_jambul.R","mydir/example1/gray63_watermelon.R","mydir/example1/gray64_durian.R","mydir/example1/gray65_watermelon.R","mydir/example1/gray66_date.R","mydir/example1/gray67_dragonfruit.R","mydir/example1/gray68_canary_melon.R","mydir/example1/gray69_fig.R","mydir/example1/gray7_ugli_fruit.R","mydir/example1/gray70_lychee.R","mydir/example1/gray71_lime.R","mydir/example1/gray72_raisin.R","mydir/example1/gray73_date.R","mydir/example1/gray74_salal_berry.R","mydir/example1/gray75_quince.R","mydir/example1/gray76_persimmon.R","mydir/example1/gray77_grape.R","mydir/example1/gray78_damson.R","mydir/example1/gray79_quince.R","mydir/example1/gray8_blood_orange.R","mydir/example1/gray80_pamelo.R","mydir/example1/gray81_date.R","mydir/example1/gray82_grape.R","mydir/example1/gray83_papaya.R","mydir/example1/gray84_mandarine.R","mydir/example1/gray85_fig.R","mydir/example1/gray86_watermelon.R","mydir/example1/gray87_lemon.R","mydir/example1/gray88_dragonfruit.R","mydir/example1/gray89_coconut.R","mydir/example1/gray9_jackfruit.R","mydir/example1/gray90_raspberry.R","mydir/example1/gray91_blueberry.R","mydir/example1/gray92_plum.R","mydir/example1/gray93_lychee.R","mydir/example1/gray94_pamelo.R","mydir/example1/gray95_loquat.R","mydir/example1/gray96_honeydew.R","mydir/example1/gray97_tamarillo.R","mydir/example1/gray98_star_fruit.R","mydir/example1/gray99_blackcurrant.R","mydir/example1/green_nut.R","mydir/example1/green1_durian.R","mydir/example1/green2_persimmon.R","mydir/example1/green3_lime.R","mydir/example1/green4_grapefruit.R","mydir/example1/greenyellow_blood_orange.R","mydir/example1/grey_currant.R","mydir/example1/grey0_rambutan.R","mydir/example1/grey1_redcurrant.R","mydir/example1/grey10_watermelon.R","mydir/example1/grey100_loquat.R","mydir/example1/grey11_cucumber.R","mydir/example1/grey12_rambutan.R","mydir/example1/grey13_fig.R","mydir/example1/grey14_purple_mangosteen.R","mydir/example1/grey15_cranberry.R","mydir/example1/grey16_kiwi_fruit.R","mydir/example1/grey17_ugli_fruit.R","mydir/example1/grey18_date.R","mydir/example1/grey19_breadfruit.R","mydir/example1/grey2_lemon.R","mydir/example1/grey20_mango.R","mydir/example1/grey21_cherimoya.R","mydir/example1/grey22_nut.R","mydir/example1/grey23_boysenberry.R","mydir/example1/grey24_pamelo.R","mydir/example1/grey25_damson.R","mydir/example1/grey26_papaya.R","mydir/example1/grey27_pomegranate.R","mydir/example1/grey28_pamelo.R","mydir/example1/grey29_blackberry.R","mydir/example1/grey3_damson.R","mydir/example1/grey30_grapefruit.R","mydir/example1/grey31_watermelon.R","mydir/example1/grey32_rambutan.R","mydir/example1/grey33_jujube.R","mydir/example1/grey34_ugli_fruit.R","mydir/example1/grey35_cloudberry.R","mydir/example1/grey36_durian.R","mydir/example1/grey37_dragonfruit.R","mydir/example1/grey38_guava.R","mydir/example1/grey39_jambul.R","mydir/example1/grey4_goji_berry.R","mydir/example1/grey40_cranberry.R","mydir/example1/grey41_currant.R","mydir/example1/grey42_grapefruit.R","mydir/example1/grey43_fig.R","mydir/example1/grey44_mulberry.R","mydir/example1/grey45_raisin.R","mydir/example1/grey46_passionfruit.R","mydir/example1/grey47_physalis.R","mydir/example1/grey48_chili_pepper.R","mydir/example1/grey49_persimmon.R","mydir/example1/grey5_watermelon.R","mydir/example1/grey50_mango.R","mydir/example1/grey51_pomelo.R","mydir/example1/grey52_banana.R","mydir/example1/grey53_loquat.R","mydir/example1/grey54_dragonfruit.R","mydir/example1/grey55_pear.R","mydir/example1/grey56_goji_berry.R","mydir/example1/grey57_cherimoya.R","mydir/example1/grey58_dragonfruit.R","mydir/example1/grey59_blood_orange.R","mydir/example1/grey6_blood_orange.R","mydir/example1/grey60_watermelon.R","mydir/example1/grey61_plum.R","mydir/example1/grey62_blood_orange.R","mydir/example1/grey63_avocado.R","mydir/example1/grey64_gooseberry.R","mydir/example1/grey65_cloudberry.R","mydir/example1/grey66_tamarillo.R","mydir/example1/grey67_durian.R","mydir/example1/grey68_olive.R","mydir/example1/grey69_durian.R","mydir/example1/grey7_grape.R","mydir/example1/grey70_kumquat.R","mydir/example1/grey71_cloudberry.R","mydir/example1/grey72_satsuma.R","mydir/example1/grey73_lemon.R","mydir/example1/grey74_kumquat.R","mydir/example1/grey75_boysenberry.R","mydir/example1/grey76_breadfruit.R","mydir/example1/grey77_blackcurrant.R","mydir/example1/grey78_jambul.R","mydir/example1/grey79_pear.R","mydir/example1/grey8_persimmon.R","mydir/example1/grey80_kumquat.R","mydir/example1/grey81_purple_mangosteen.R","mydir/example1/grey82_canary_melon.R","mydir/example1/grey83_mandarine.R","mydir/example1/grey84_durian.R","mydir/example1/grey85_nectarine.R","mydir/example1/grey86_elderberry.R","mydir/example1/grey87_banana.R","mydir/example1/grey88_physalis.R","mydir/example1/grey89_banana.R","mydir/example1/grey9_coconut.R","mydir/example1/grey90_eggplant.R","mydir/example1/grey91_papaya.R","mydir/example1/grey92_damson.R","mydir/example1/grey93_kiwi_fruit.R","mydir/example1/grey94_nectarine.R","mydir/example1/grey95_avocado.R","mydir/example1/grey96_watermelon.R","mydir/example1/grey97_lemon.R","mydir/example1/grey98_papaya.R","mydir/example1/grey99_bell_pepper.R","mydir/example1/honeydew_jackfruit.R","mydir/example1/honeydew1_raspberry.R","mydir/example1/honeydew2_pear.R","mydir/example1/honeydew3_apple.R","mydir/example1/honeydew4_banana.R","mydir/example1/hotpink_fig.R","mydir/example1/hotpink1_date.R","mydir/example1/hotpink2_mandarine.R","mydir/example1/hotpink3_satsuma.R","mydir/example1/hotpink4_strawberry.R","mydir/example1/indianred_mango.R","mydir/example1/indianred1_boysenberry.R","mydir/example1/indianred2_mandarine.R","mydir/example1/indianred3_blueberry.R","mydir/example1/indianred4_apricot.R","mydir/example1/ivory_durian.R","mydir/example1/ivory1_cantaloupe.R","mydir/example1/ivory2_watermelon.R","mydir/example1/ivory3_apricot.R","mydir/example1/ivory4_cantaloupe.R","mydir/example1/khaki_ugli_fruit.R","mydir/example1/khaki1_jambul.R","mydir/example1/khaki2_blackberry.R","mydir/example1/khaki3_breadfruit.R","mydir/example1/khaki4_olive.R","mydir/example1/lavender_huckleberry.R","mydir/example1/lavenderblush_bilberry.R","mydir/example1/lavenderblush1_bell_pepper.R","mydir/example1/lavenderblush2_papaya.R","mydir/example1/lavenderblush3_cranberry.R","mydir/example1/lavenderblush4_papaya.R","mydir/example1/lawngreen_gooseberry.R","mydir/example1/lemonchiffon_loquat.R","mydir/example1/lemonchiffon1_apple.R","mydir/example1/lemonchiffon2_pomelo.R","mydir/example1/lemonchiffon3_papaya.R","mydir/example1/lemonchiffon4_pomelo.R","mydir/example1/lightblue_persimmon.R","mydir/example1/lightblue1_salal_berry.R","mydir/example1/lightblue2_olive.R","mydir/example1/lightblue3_cloudberry.R","mydir/example1/lightblue4_mango.R","mydir/example1/lightcoral_plum.R","mydir/example1/lightcyan_huckleberry.R","mydir/example1/lightcyan1_pomegranate.R","mydir/example1/lightcyan2_cranberry.R","mydir/example1/lightcyan3_mulberry.R","mydir/example1/lightcyan4_nut.R","mydir/example1/lightgoldenrod_lime.R","mydir/example1/lightgoldenrod1_persimmon.R","mydir/example1/lightgoldenrod2_fig.R","mydir/example1/lightgoldenrod3_ugli_fruit.R","mydir/example1/lightgoldenrod4_canary_melon.R","mydir/example1/lightgoldenrodyellow_honeydew.R","mydir/example1/lightgray_pineapple.R","mydir/example1/lightgreen_canary_melon.R","mydir/example1/lightgrey_grapefruit.R","mydir/example1/lightpink_lemon.R","mydir/example1/lightpink1_lime.R","mydir/example1/lightpink2_boysenberry.R","mydir/example1/lightpink3_blackberry.R","mydir/example1/lightpink4_nectarine.R","mydir/example1/lightsalmon_lime.R","mydir/example1/lightsalmon1_nectarine.R","mydir/example1/lightsalmon2_pear.R","mydir/example1/lightsalmon3_watermelon.R","mydir/example1/lightsalmon4_watermelon.R","mydir/example1/lightseagreen_canary_melon.R","mydir/example1/lightskyblue_raisin.R","mydir/example1/lightskyblue1_cranberry.R","mydir/example1/lightskyblue2_watermelon.R","mydir/example1/lightskyblue3_olive.R","mydir/example1/lightskyblue4_physalis.R","mydir/example1/lightslateblue_boysenberry.R","mydir/example1/lightslategray_bell_pepper.R","mydir/example1/lightslategrey_chili_pepper.R","mydir/example1/lightsteelblue_banana.R","mydir/example1/lightsteelblue1_lime.R","mydir/example1/lightsteelblue2_blood_orange.R","mydir/example1/lightsteelblue3_kumquat.R","mydir/example1/lightsteelblue4_papaya.R","mydir/example1/lightyellow_chili_pepper.R","mydir/example1/lightyellow1_lime.R","mydir/example1/lightyellow2_cloudberry.R","mydir/example1/lightyellow3_coconut.R","mydir/example1/lightyellow4_grape.R","mydir/example1/limegreen_pineapple.R","mydir/example1/linen_avocado.R","mydir/example1/magenta_eggplant.R","mydir/example1/magenta1_cherimoya.R","mydir/example1/magenta2_clementine.R","mydir/example1/magenta3_huckleberry.R","mydir/example1/magenta4_blackberry.R","mydir/example1/maroon_kumquat.R","mydir/example1/maroon1_cranberry.R","mydir/example1/maroon2_pineapple.R","mydir/example1/maroon3_apricot.R","mydir/example1/maroon4_fig.R","mydir/example1/mediumaquamarine_fig.R","mydir/example1/mediumblue_passionfruit.R","mydir/example1/mediumorchid_breadfruit.R","mydir/example1/mediumorchid1_blackberry.R","mydir/example1/mediumorchid2_star_fruit.R","mydir/example1/mediumorchid3_honeydew.R","mydir/example1/mediumorchid4_blackberry.R","mydir/example1/mediumpurple_jambul.R","mydir/example1/mediumpurple1_bell_pepper.R","mydir/example1/mediumpurple2_grape.R","mydir/example1/mediumpurple3_rock_melon.R","mydir/example1/mediumpurple4_raisin.R","mydir/example1/mediumseagreen_bell_pepper.R","mydir/example1/mediumslateblue_pomelo.R","mydir/example1/mediumspringgreen_banana.R","mydir/example1/mediumturquoise_pamelo.R","mydir/example1/mediumvioletred_apple.R","mydir/example1/midnightblue_ugli_fruit.R","mydir/example1/mintcream_ugli_fruit.R","mydir/example1/mistyrose_lychee.R","mydir/example1/mistyrose1_dragonfruit.R","mydir/example1/mistyrose2_clementine.R","mydir/example1/mistyrose3_cranberry.R","mydir/example1/mistyrose4_blackberry.R","mydir/example1/moccasin_redcurrant.R","mydir/example1/navajowhite_pamelo.R","mydir/example1/navajowhite1_huckleberry.R","mydir/example1/navajowhite2_pomelo.R","mydir/example1/navajowhite3_apricot.R","mydir/example1/navajowhite4_peach.R","mydir/example1/navy_persimmon.R","mydir/example1/navyblue_kiwi_fruit.R","mydir/example1/oldlace_bell_pepper.R","mydir/example1/olivedrab_kumquat.R","mydir/example1/olivedrab1_lychee.R","mydir/example1/olivedrab2_date.R","mydir/example1/olivedrab3_pomelo.R","mydir/example1/olivedrab4_passionfruit.R","mydir/example1/orange_physalis.R","mydir/example1/orange1_watermelon.R","mydir/example1/orange2_raisin.R","mydir/example1/orange3_bell_pepper.R","mydir/example1/orange4_plum.R","mydir/example1/orangered_quince.R","mydir/example1/orangered1_blackcurrant.R","mydir/example1/orangered2_nut.R","mydir/example1/orangered3_chili_pepper.R","mydir/example1/orangered4_mango.R","mydir/example1/orchid_rock_melon.R","mydir/example1/orchid1_clementine.R","mydir/example1/orchid2_blueberry.R","mydir/example1/orchid3_rock_melon.R","mydir/example1/orchid4_ugli_fruit.R","mydir/example1/palegoldenrod_star_fruit.R","mydir/example1/palegreen_bell_pepper.R","mydir/example1/palegreen1_strawberry.R","mydir/example1/palegreen2_tamarillo.R","mydir/example1/palegreen3_redcurrant.R","mydir/example1/palegreen4_loquat.R","mydir/example1/paleturquoise_satsuma.R","mydir/example1/paleturquoise1_orange.R","mydir/example1/paleturquoise2_ugli_fruit.R","mydir/example1/paleturquoise3_breadfruit.R","mydir/example1/paleturquoise4_lemon.R","mydir/example1/palevioletred_lime.R","mydir/example1/palevioletred1_mandarine.R","mydir/example1/palevioletred2_blackcurrant.R","mydir/example1/palevioletred3_star_fruit.R","mydir/example1/palevioletred4_blood_orange.R","mydir/example1/papayawhip_jambul.R","mydir/example1/peachpuff_ugli_fruit.R","mydir/example1/peachpuff1_pamelo.R","mydir/example1/peachpuff2_strawberry.R","mydir/example1/peachpuff3_avocado.R","mydir/example1/peachpuff4_guava.R","mydir/example1/peru_strawberry.R","mydir/example1/pink_rambutan.R","mydir/example1/pink1_cantaloupe.R","mydir/example1/pink2_bell_pepper.R","mydir/example1/pink3_pomegranate.R","mydir/example1/pink4_raspberry.R","mydir/example1/plum_pomelo.R","mydir/example1/plum1_jambul.R","mydir/example1/plum2_raisin.R","mydir/example1/plum3_lime.R","mydir/example1/plum4_jackfruit.R","mydir/example1/powderblue_tamarillo.R","mydir/example1/purple_blueberry.R","mydir/example1/purple1_nut.R","mydir/example1/purple2_cherimoya.R","mydir/example1/purple3_salal_berry.R","mydir/example1/purple4_pineapple.R","mydir/example1/red_persimmon.R","mydir/example1/red1_durian.R","mydir/example1/red2_grapefruit.R","mydir/example1/red3_goji_berry.R","mydir/example1/red4_tangerine.R","mydir/example1/rosybrown_durian.R","mydir/example1/rosybrown1_dragonfruit.R","mydir/example1/rosybrown2_pear.R","mydir/example1/rosybrown3_strawberry.R","mydir/example1/rosybrown4_loquat.R","mydir/example1/royalblue_purple_mangosteen.R","mydir/example1/royalblue1_fig.R","mydir/example1/royalblue2_pamelo.R","mydir/example1/royalblue3_breadfruit.R","mydir/example1/royalblue4_nectarine.R","mydir/example1/saddlebrown_grape.R","mydir/example1/salmon_grape.R","mydir/example1/salmon1_pineapple.R","mydir/example1/salmon2_jambul.R","mydir/example1/salmon3_durian.R","mydir/example1/salmon4_blueberry.R","mydir/example1/sandybrown_goji_berry.R","mydir/example1/seagreen_chili_pepper.R","mydir/example1/seagreen1_banana.R","mydir/example1/seagreen2_goji_berry.R","mydir/example1/seagreen3_goji_berry.R","mydir/example1/seagreen4_cherry.R","mydir/example1/seashell_papaya.R","mydir/example1/seashell1_passionfruit.R","mydir/example1/seashell2_breadfruit.R","mydir/example1/seashell3_grapefruit.R","mydir/example1/seashell4_quince.R","mydir/example1/sienna_apple.R","mydir/example1/sienna1_quince.R","mydir/example1/sienna2_durian.R","mydir/example1/sienna3_mulberry.R","mydir/example1/sienna4_blackcurrant.R","mydir/example1/skyblue_cloudberry.R","mydir/example1/skyblue1_jackfruit.R","mydir/example1/skyblue2_star_fruit.R","mydir/example1/skyblue3_fig.R","mydir/example1/skyblue4_honeydew.R","mydir/example1/slateblue_currant.R","mydir/example1/slateblue1_currant.R","mydir/example1/slateblue2_cloudberry.R","mydir/example1/slateblue3_physalis.R","mydir/example1/slateblue4_quince.R","mydir/example1/slategray_chili_pepper.R","mydir/example1/slategray1_raisin.R","mydir/example1/slategray2_blueberry.R","mydir/example1/slategray3_raisin.R","mydir/example1/slategray4_cloudberry.R","mydir/example1/slategrey_clementine.R","mydir/example1/snow_nut.R","mydir/example1/snow1_tamarillo.R","mydir/example1/snow2_mango.R","mydir/example1/snow3_raisin.R","mydir/example1/snow4_jambul.R","mydir/example1/springgreen_persimmon.R","mydir/example1/springgreen1_cherimoya.R","mydir/example1/springgreen2_raisin.R","mydir/example1/springgreen3_lime.R","mydir/example1/springgreen4_purple_mangosteen.R","mydir/example1/steelblue_nectarine.R","mydir/example1/steelblue1_clementine.R","mydir/example1/steelblue2_guava.R","mydir/example1/steelblue3_star_fruit.R","mydir/example1/steelblue4_satsuma.R","mydir/example1/tan_apple.R","mydir/example1/tan1_jujube.R","mydir/example1/tan2_quince.R","mydir/example1/tan3_chili_pepper.R","mydir/example1/tan4_huckleberry.R","mydir/example1/thistle_cloudberry.R","mydir/example1/thistle1_bilberry.R","mydir/example1/thistle2_bilberry.R","mydir/example1/thistle3_grape.R","mydir/example1/thistle4_goji_berry.R","mydir/example1/tomato_lime.R","mydir/example1/tomato1_dragonfruit.R","mydir/example1/tomato2_guava.R","mydir/example1/tomato3_pomegranate.R","mydir/example1/tomato4_lychee.R","mydir/example1/turquoise_strawberry.R","mydir/example1/turquoise1_goji_berry.R","mydir/example1/turquoise2_feijoa.R","mydir/example1/turquoise3_boysenberry.R","mydir/example1/turquoise4_grape.R","mydir/example1/violet_lychee.R","mydir/example1/violetred_huckleberry.R","mydir/example1/violetred1_blood_orange.R","mydir/example1/violetred2_chili_pepper.R","mydir/example1/violetred3_date.R","mydir/example1/violetred4_raspberry.R","mydir/example1/wheat_jambul.R","mydir/example1/wheat1_blackcurrant.R","mydir/example1/wheat2_pear.R","mydir/example1/wheat3_rock_melon.R","mydir/example1/wheat4_durian.R","mydir/example1/white_dragonfruit.R","mydir/example1/whitesmoke_raisin.R","mydir/example1/yellow_date.R","mydir/example1/yellow1_date.R","mydir/example1/yellow2_rock_melon.R","mydir/example1/yellow3_redcurrant.R","mydir/example1/yellow4_quince.R","mydir/example1/yellowgreen_tangerine.R","mydir/example2/aliceblue_honeydew.R","mydir/example2/antiquewhite_tamarillo.R","mydir/example2/antiquewhite1_durian.R","mydir/example2/antiquewhite2_jambul.R","mydir/example2/antiquewhite3_fig.R","mydir/example2/antiquewhite4_lychee.R","mydir/example2/aquamarine_dragonfruit.R","mydir/example2/aquamarine1_chili_pepper.R","mydir/example2/aquamarine2_feijoa.R","mydir/example2/aquamarine3_kumquat.R","mydir/example2/aquamarine4_apricot.R","mydir/example2/azure_date.R","mydir/example2/azure1_damson.R","mydir/example2/azure2_goji_berry.R","mydir/example2/azure3_physalis.R","mydir/example2/azure4_kiwi_fruit.R","mydir/example2/beige_lychee.R","mydir/example2/bisque_persimmon.R","mydir/example2/bisque1_cranberry.R","mydir/example2/bisque2_pomegranate.R","mydir/example2/bisque3_gooseberry.R","mydir/example2/bisque4_apple.R","mydir/example2/black_cherimoya.R","mydir/example2/blanchedalmond_physalis.R","mydir/example2/blue_rock_melon.R","mydir/example2/blue1_salal_berry.R","mydir/example2/blue2_dragonfruit.R","mydir/example2/blue3_fig.R","mydir/example2/blue4_blackberry.R","mydir/example2/blueviolet_nectarine.R","mydir/example2/brown_elderberry.R","mydir/example2/brown1_pineapple.R","mydir/example2/brown2_banana.R","mydir/example2/brown3_watermelon.R","mydir/example2/brown4_guava.R","mydir/example2/burlywood_mandarine.R","mydir/example2/burlywood1_tangerine.R","mydir/example2/burlywood2_bilberry.R","mydir/example2/burlywood3_lime.R","mydir/example2/burlywood4_kumquat.R","mydir/example2/cadetblue_rambutan.R","mydir/example2/cadetblue1_redcurrant.R","mydir/example2/cadetblue2_durian.R","mydir/example2/cadetblue3_jackfruit.R","mydir/example2/cadetblue4_cranberry.R","mydir/example2/chartreuse_cucumber.R","mydir/example2/chartreuse1_jambul.R","mydir/example2/chartreuse2_olive.R","mydir/example2/chartreuse3_dragonfruit.R","mydir/example2/chartreuse4_coconut.R","mydir/example2/chocolate_blueberry.R","mydir/example2/chocolate1_kumquat.R","mydir/example2/chocolate2_lime.R","mydir/example2/chocolate3_clementine.R","mydir/example2/chocolate4_cherry.R","mydir/example2/coral_plum.R","mydir/example2/coral1_star_fruit.R","mydir/example2/coral2_pear.R","mydir/example2/coral3_date.R","mydir/example2/coral4_jambul.R","mydir/example2/cornflowerblue_grapefruit.R","mydir/example2/cornsilk_blood_orange.R","mydir/example2/cornsilk1_currant.R","mydir/example2/cornsilk2_papaya.R","mydir/example2/cornsilk3_apricot.R","mydir/example2/cornsilk4_purple_mangosteen.R","mydir/example2/cyan_olive.R","mydir/example2/cyan1_watermelon.R","mydir/example2/cyan2_olive.R","mydir/example2/cyan3_redcurrant.R","mydir/example2/cyan4_blackcurrant.R","mydir/example2/darkblue_raisin.R","mydir/example2/darkcyan_durian.R","mydir/example2/darkgoldenrod_grape.R","mydir/example2/darkgoldenrod1_pineapple.R","mydir/example2/darkgoldenrod2_physalis.R","mydir/example2/darkgoldenrod3_lemon.R","mydir/example2/darkgoldenrod4_damson.R","mydir/example2/darkgray_mandarine.R","mydir/example2/darkgreen_salal_berry.R","mydir/example2/darkgrey_strawberry.R","mydir/example2/darkkhaki_avocado.R","mydir/example2/darkmagenta_pomegranate.R","mydir/example2/darkolivegreen_star_fruit.R","mydir/example2/darkolivegreen1_pear.R","mydir/example2/darkolivegreen2_raisin.R","mydir/example2/darkolivegreen3_jackfruit.R","mydir/example2/darkolivegreen4_guava.R","mydir/example2/darkorange_honeydew.R","mydir/example2/darkorange1_purple_mangosteen.R","mydir/example2/darkorange2_redcurrant.R","mydir/example2/darkorange3_pomelo.R","mydir/example2/darkorange4_guava.R","mydir/example2/darkorchid_pomelo.R","mydir/example2/darkorchid1_watermelon.R","mydir/example2/darkorchid2_passionfruit.R","mydir/example2/darkorchid3_salal_berry.R","mydir/example2/darkorchid4_satsuma.R","mydir/example2/darkred_blueberry.R","mydir/example2/darksalmon_goji_berry.R","mydir/example2/darkseagreen_canary_melon.R","mydir/example2/darkseagreen1_eggplant.R","mydir/example2/darkseagreen2_physalis.R","mydir/example2/darkseagreen3_nectarine.R","mydir/example2/darkseagreen4_persimmon.R","mydir/example2/darkslateblue_peach.R","mydir/example2/darkslategray_feijoa.R","mydir/example2/darkslategray1_salal_berry.R","mydir/example2/darkslategray2_gooseberry.R","mydir/example2/darkslategray3_bilberry.R","mydir/example2/darkslategray4_plum.R","mydir/example2/darkslategrey_orange.R","mydir/example2/darkturquoise_damson.R","mydir/example2/darkviolet_nut.R","mydir/example2/deeppink_peach.R","mydir/example2/deeppink1_rambutan.R","mydir/example2/deeppink2_passionfruit.R","mydir/example2/deeppink3_mango.R","mydir/example2/deeppink4_dragonfruit.R","mydir/example2/deepskyblue_breadfruit.R","mydir/example2/deepskyblue1_pomegranate.R","mydir/example2/deepskyblue2_blueberry.R","mydir/example2/deepskyblue3_currant.R","mydir/example2/deepskyblue4_mandarine.R","mydir/example2/dimgray_mandarine.R","mydir/example2/dimgrey_clementine.R","mydir/example2/dodgerblue_grapefruit.R","mydir/example2/dodgerblue1_lemon.R","mydir/example2/dodgerblue2_dragonfruit.R","mydir/example2/dodgerblue3_jambul.R","mydir/example2/dodgerblue4_rock_melon.R","mydir/example2/file_a.txt","mydir/example2/file_b.txt","mydir/example2/file_c.txt","mydir/example2/file_d.txt","mydir/example2/file_e.txt","mydir/example2/file_f.txt","mydir/example2/file_g.txt","mydir/example2/file_h.txt","mydir/example2/file_i.txt","mydir/example2/file_j.txt","mydir/example2/file_k.txt","mydir/example2/file_l.txt","mydir/example2/file_m.txt","mydir/example2/file_n.txt","mydir/example2/file_o.txt","mydir/example2/file_p.txt","mydir/example2/file_q.txt","mydir/example2/file_r.txt","mydir/example2/file_s.txt","mydir/example2/file_t.txt","mydir/example2/file_u.txt","mydir/example2/file_v.txt","mydir/example2/file_w.txt","mydir/example2/file_x.txt","mydir/example2/file_y.txt","mydir/example2/file_z.txt","mydir/example2/firebrick_watermelon.R","mydir/example2/firebrick1_damson.R","mydir/example2/firebrick2_purple_mangosteen.R","mydir/example2/firebrick3_gooseberry.R","mydir/example2/firebrick4_eggplant.R","mydir/example2/floralwhite_pamelo.R","mydir/example2/forestgreen_chili_pepper.R","mydir/example2/gainsboro_star_fruit.R","mydir/example2/ghostwhite_guava.R","mydir/example2/gold_watermelon.R","mydir/example2/gold1_cucumber.R","mydir/example2/gold2_papaya.R","mydir/example2/gold3_bell_pepper.R","mydir/example2/gold4_star_fruit.R","mydir/example2/goldenrod_blackberry.R","mydir/example2/goldenrod1_boysenberry.R","mydir/example2/goldenrod2_quince.R","mydir/example2/goldenrod3_durian.R","mydir/example2/goldenrod4_purple_mangosteen.R","mydir/example2/gray_loquat.R","mydir/example2/gray0_nut.R","mydir/example2/gray1_feijoa.R","mydir/example2/gray10_boysenberry.R","mydir/example2/gray100_apricot.R","mydir/example2/gray11_mulberry.R","mydir/example2/gray12_goji_berry.R","mydir/example2/gray13_chili_pepper.R","mydir/example2/gray14_boysenberry.R","mydir/example2/gray15_coconut.R","mydir/example2/gray16_passionfruit.R","mydir/example2/gray17_guava.R","mydir/example2/gray18_grape.R","mydir/example2/gray19_rock_melon.R","mydir/example2/gray2_lychee.R","mydir/example2/gray20_elderberry.R","mydir/example2/gray21_cranberry.R","mydir/example2/gray22_tangerine.R","mydir/example2/gray23_date.R","mydir/example2/gray24_eggplant.R","mydir/example2/gray25_goji_berry.R","mydir/example2/gray26_dragonfruit.R","mydir/example2/gray27_cantaloupe.R","mydir/example2/gray28_plum.R","mydir/example2/gray29_date.R","mydir/example2/gray3_cherry.R","mydir/example2/gray30_loquat.R","mydir/example2/gray31_watermelon.R","mydir/example2/gray32_blackberry.R","mydir/example2/gray33_star_fruit.R","mydir/example2/gray34_cantaloupe.R","mydir/example2/gray35_cherimoya.R","mydir/example2/gray36_grape.R","mydir/example2/gray37_grape.R","mydir/example2/gray38_pear.R","mydir/example2/gray39_breadfruit.R","mydir/example2/gray4_guava.R","mydir/example2/gray40_cherimoya.R","mydir/example2/gray41_purple_mangosteen.R","mydir/example2/gray42_cherimoya.R","mydir/example2/gray43_lemon.R","mydir/example2/gray44_loquat.R","mydir/example2/gray45_pamelo.R","mydir/example2/gray46_pear.R","mydir/example2/gray47_star_fruit.R","mydir/example2/gray48_loquat.R","mydir/example2/gray49_elderberry.R","mydir/example2/gray5_kiwi_fruit.R","mydir/example2/gray50_pomegranate.R","mydir/example2/gray51_pear.R","mydir/example2/gray52_boysenberry.R","mydir/example2/gray53_breadfruit.R","mydir/example2/gray54_pear.R","mydir/example2/gray55_boysenberry.R","mydir/example2/gray56_dragonfruit.R","mydir/example2/gray57_lime.R","mydir/example2/gray58_nut.R","mydir/example2/gray59_redcurrant.R","mydir/example2/gray6_pomegranate.R","mydir/example2/gray60_cucumber.R","mydir/example2/gray61_papaya.R","mydir/example2/gray62_nectarine.R","mydir/example2/gray63_pomegranate.R","mydir/example2/gray64_eggplant.R","mydir/example2/gray65_boysenberry.R","mydir/example2/gray66_raisin.R","mydir/example2/gray67_blood_orange.R","mydir/example2/gray68_purple_mangosteen.R","mydir/example2/gray69_damson.R","mydir/example2/gray7_plum.R","mydir/example2/gray70_currant.R","mydir/example2/gray71_plum.R","mydir/example2/gray72_kumquat.R","mydir/example2/gray73_grapefruit.R","mydir/example2/gray74_peach.R","mydir/example2/gray75_grape.R","mydir/example2/gray76_banana.R","mydir/example2/gray77_ugli_fruit.R","mydir/example2/gray78_raisin.R","mydir/example2/gray79_nectarine.R","mydir/example2/gray8_bilberry.R","mydir/example2/gray80_olive.R","mydir/example2/gray81_cherimoya.R","mydir/example2/gray82_fig.R","mydir/example2/gray83_avocado.R","mydir/example2/gray84_rambutan.R","mydir/example2/gray85_orange.R","mydir/example2/gray86_peach.R","mydir/example2/gray87_redcurrant.R","mydir/example2/gray88_pineapple.R","mydir/example2/gray89_ugli_fruit.R","mydir/example2/gray9_pear.R","mydir/example2/gray90_passionfruit.R","mydir/example2/gray91_cherry.R","mydir/example2/gray92_satsuma.R","mydir/example2/gray93_bell_pepper.R","mydir/example2/gray94_blackcurrant.R","mydir/example2/gray95_cantaloupe.R","mydir/example2/gray96_jujube.R","mydir/example2/gray97_nectarine.R","mydir/example2/gray98_tangerine.R","mydir/example2/gray99_physalis.R","mydir/example2/green_plum.R","mydir/example2/green1_pamelo.R","mydir/example2/green2_avocado.R","mydir/example2/green3_mandarine.R","mydir/example2/green4_watermelon.R","mydir/example2/greenyellow_eggplant.R","mydir/example2/grey_jackfruit.R","mydir/example2/grey0_nut.R","mydir/example2/grey1_star_fruit.R","mydir/example2/grey10_mulberry.R","mydir/example2/grey100_durian.R","mydir/example2/grey11_breadfruit.R","mydir/example2/grey12_currant.R","mydir/example2/grey13_lychee.R","mydir/example2/grey14_olive.R","mydir/example2/grey15_clementine.R","mydir/example2/grey16_orange.R","mydir/example2/grey17_goji_berry.R","mydir/example2/grey18_purple_mangosteen.R","mydir/example2/grey19_date.R","mydir/example2/grey2_papaya.R","mydir/example2/grey20_gooseberry.R","mydir/example2/grey21_currant.R","mydir/example2/grey22_mandarine.R","mydir/example2/grey23_salal_berry.R","mydir/example2/grey24_honeydew.R","mydir/example2/grey25_pamelo.R","mydir/example2/grey26_raspberry.R","mydir/example2/grey27_rock_melon.R","mydir/example2/grey28_jambul.R","mydir/example2/grey29_purple_mangosteen.R","mydir/example2/grey3_olive.R","mydir/example2/grey30_apricot.R","mydir/example2/grey31_mandarine.R","mydir/example2/grey32_banana.R","mydir/example2/grey33_lychee.R","mydir/example2/grey34_breadfruit.R","mydir/example2/grey35_pomelo.R","mydir/example2/grey36_papaya.R","mydir/example2/grey37_olive.R","mydir/example2/grey38_blackberry.R","mydir/example2/grey39_banana.R","mydir/example2/grey4_damson.R","mydir/example2/grey40_eggplant.R","mydir/example2/grey41_cherimoya.R","mydir/example2/grey42_feijoa.R","mydir/example2/grey43_chili_pepper.R","mydir/example2/grey44_breadfruit.R","mydir/example2/grey45_lime.R","mydir/example2/grey46_strawberry.R","mydir/example2/grey47_currant.R","mydir/example2/grey48_rock_melon.R","mydir/example2/grey49_watermelon.R","mydir/example2/grey5_coconut.R","mydir/example2/grey50_fig.R","mydir/example2/grey51_dragonfruit.R","mydir/example2/grey52_orange.R","mydir/example2/grey53_cucumber.R","mydir/example2/grey54_banana.R","mydir/example2/grey55_nectarine.R","mydir/example2/grey56_ugli_fruit.R","mydir/example2/grey57_tangerine.R","mydir/example2/grey58_ugli_fruit.R","mydir/example2/grey59_pear.R","mydir/example2/grey6_nectarine.R","mydir/example2/grey60_nut.R","mydir/example2/grey61_pamelo.R","mydir/example2/grey62_watermelon.R","mydir/example2/grey63_coconut.R","mydir/example2/grey64_clementine.R","mydir/example2/grey65_clementine.R","mydir/example2/grey66_physalis.R","mydir/example2/grey67_loquat.R","mydir/example2/grey68_pear.R","mydir/example2/grey69_elderberry.R","mydir/example2/grey7_cloudberry.R","mydir/example2/grey70_passionfruit.R","mydir/example2/grey71_quince.R","mydir/example2/grey72_cloudberry.R","mydir/example2/grey73_damson.R","mydir/example2/grey74_cucumber.R","mydir/example2/grey75_banana.R","mydir/example2/grey76_kumquat.R","mydir/example2/grey77_grapefruit.R","mydir/example2/grey78_eggplant.R","mydir/example2/grey79_clementine.R","mydir/example2/grey8_pamelo.R","mydir/example2/grey80_nut.R","mydir/example2/grey81_cherry.R","mydir/example2/grey82_canary_melon.R","mydir/example2/grey83_huckleberry.R","mydir/example2/grey84_gooseberry.R","mydir/example2/grey85_kumquat.R","mydir/example2/grey86_nut.R","mydir/example2/grey87_durian.R","mydir/example2/grey88_blood_orange.R","mydir/example2/grey89_lychee.R","mydir/example2/grey9_bilberry.R","mydir/example2/grey90_goji_berry.R","mydir/example2/grey91_physalis.R","mydir/example2/grey92_canary_melon.R","mydir/example2/grey93_cherry.R","mydir/example2/grey94_grape.R","mydir/example2/grey95_gooseberry.R","mydir/example2/grey96_canary_melon.R","mydir/example2/grey97_grapefruit.R","mydir/example2/grey98_breadfruit.R","mydir/example2/grey99_mulberry.R","mydir/example2/honeydew_lychee.R","mydir/example2/honeydew1_pineapple.R","mydir/example2/honeydew2_pear.R","mydir/example2/honeydew3_pamelo.R","mydir/example2/honeydew4_plum.R","mydir/example2/hotpink_tangerine.R","mydir/example2/hotpink1_persimmon.R","mydir/example2/hotpink2_blackberry.R","mydir/example2/hotpink3_cantaloupe.R","mydir/example2/hotpink4_cucumber.R","mydir/example2/indianred_quince.R","mydir/example2/indianred1_boysenberry.R","mydir/example2/indianred2_blackcurrant.R","mydir/example2/indianred3_purple_mangosteen.R","mydir/example2/indianred4_kumquat.R","mydir/example2/ivory_lime.R","mydir/example2/ivory1_jambul.R","mydir/example2/ivory2_redcurrant.R","mydir/example2/ivory3_grape.R","mydir/example2/ivory4_cherry.R","mydir/example2/khaki_apricot.R","mydir/example2/khaki1_pomegranate.R","mydir/example2/khaki2_boysenberry.R","mydir/example2/khaki3_goji_berry.R","mydir/example2/khaki4_salal_berry.R","mydir/example2/lavender_satsuma.R","mydir/example2/lavenderblush_mango.R","mydir/example2/lavenderblush1_mandarine.R","mydir/example2/lavenderblush2_fig.R","mydir/example2/lavenderblush3_apricot.R","mydir/example2/lavenderblush4_olive.R","mydir/example2/lawngreen_lime.R","mydir/example2/lemonchiffon_apple.R","mydir/example2/lemonchiffon1_avocado.R","mydir/example2/lemonchiffon2_guava.R","mydir/example2/lemonchiffon3_nectarine.R","mydir/example2/lemonchiffon4_damson.R","mydir/example2/lightblue_kiwi_fruit.R","mydir/example2/lightblue1_chili_pepper.R","mydir/example2/lightblue2_chili_pepper.R","mydir/example2/lightblue3_blood_orange.R","mydir/example2/lightblue4_cantaloupe.R","mydir/example2/lightcoral_gooseberry.R","mydir/example2/lightcyan_goji_berry.R","mydir/example2/lightcyan1_purple_mangosteen.R","mydir/example2/lightcyan2_nut.R","mydir/example2/lightcyan3_lime.R","mydir/example2/lightcyan4_pineapple.R","mydir/example2/lightgoldenrod_pineapple.R","mydir/example2/lightgoldenrod1_physalis.R","mydir/example2/lightgoldenrod2_boysenberry.R","mydir/example2/lightgoldenrod3_clementine.R","mydir/example2/lightgoldenrod4_cherry.R","mydir/example2/lightgoldenrodyellow_canary_melon.R","mydir/example2/lightgray_kiwi_fruit.R","mydir/example2/lightgreen_jujube.R","mydir/example2/lightgrey_pear.R","mydir/example2/lightpink_cherry.R","mydir/example2/lightpink1_apricot.R","mydir/example2/lightpink2_grapefruit.R","mydir/example2/lightpink3_persimmon.R","mydir/example2/lightpink4_huckleberry.R","mydir/example2/lightsalmon_chili_pepper.R","mydir/example2/lightsalmon1_pomelo.R","mydir/example2/lightsalmon2_date.R","mydir/example2/lightsalmon3_orange.R","mydir/example2/lightsalmon4_star_fruit.R","mydir/example2/lightseagreen_damson.R","mydir/example2/lightskyblue_apple.R","mydir/example2/lightskyblue1_jujube.R","mydir/example2/lightskyblue2_fig.R","mydir/example2/lightskyblue3_apricot.R","mydir/example2/lightskyblue4_apricot.R","mydir/example2/lightslateblue_cantaloupe.R","mydir/example2/lightslategray_cantaloupe.R","mydir/example2/lightslategrey_bell_pepper.R","mydir/example2/lightsteelblue_jujube.R","mydir/example2/lightsteelblue1_cantaloupe.R","mydir/example2/lightsteelblue2_olive.R","mydir/example2/lightsteelblue3_apple.R","mydir/example2/lightsteelblue4_rock_melon.R","mydir/example2/lightyellow_fig.R","mydir/example2/lightyellow1_nectarine.R","mydir/example2/lightyellow2_eggplant.R","mydir/example2/lightyellow3_jackfruit.R","mydir/example2/lightyellow4_pear.R","mydir/example2/limegreen_cherry.R","mydir/example2/linen_grapefruit.R","mydir/example2/magenta_canary_melon.R","mydir/example2/magenta1_lemon.R","mydir/example2/magenta2_passionfruit.R","mydir/example2/magenta3_ugli_fruit.R","mydir/example2/magenta4_banana.R","mydir/example2/maroon_plum.R","mydir/example2/maroon1_blackberry.R","mydir/example2/maroon2_canary_melon.R","mydir/example2/maroon3_mulberry.R","mydir/example2/maroon4_grapefruit.R","mydir/example2/mediumaquamarine_avocado.R","mydir/example2/mediumblue_boysenberry.R","mydir/example2/mediumorchid_cloudberry.R","mydir/example2/mediumorchid1_lime.R","mydir/example2/mediumorchid2_strawberry.R","mydir/example2/mediumorchid3_guava.R","mydir/example2/mediumorchid4_star_fruit.R","mydir/example2/mediumpurple_rock_melon.R","mydir/example2/mediumpurple1_kumquat.R","mydir/example2/mediumpurple2_durian.R","mydir/example2/mediumpurple3_passionfruit.R","mydir/example2/mediumpurple4_goji_berry.R","mydir/example2/mediumseagreen_cherry.R","mydir/example2/mediumslateblue_eggplant.R","mydir/example2/mediumspringgreen_orange.R","mydir/example2/mediumturquoise_cucumber.R","mydir/example2/mediumvioletred_olive.R","mydir/example2/midnightblue_jambul.R","mydir/example2/mintcream_rambutan.R","mydir/example2/mistyrose_guava.R","mydir/example2/mistyrose1_jackfruit.R","mydir/example2/mistyrose2_quince.R","mydir/example2/mistyrose3_eggplant.R","mydir/example2/mistyrose4_ugli_fruit.R","mydir/example2/moccasin_peach.R","mydir/example2/navajowhite_olive.R","mydir/example2/navajowhite1_cranberry.R","mydir/example2/navajowhite2_guava.R","mydir/example2/navajowhite3_pamelo.R","mydir/example2/navajowhite4_goji_berry.R","mydir/example2/navy_plum.R","mydir/example2/navyblue_lime.R","mydir/example2/oldlace_mango.R","mydir/example2/olivedrab_raspberry.R","mydir/example2/olivedrab1_ugli_fruit.R","mydir/example2/olivedrab2_redcurrant.R","mydir/example2/olivedrab3_avocado.R","mydir/example2/olivedrab4_dragonfruit.R","mydir/example2/orange_guava.R","mydir/example2/orange1_apricot.R","mydir/example2/orange2_lemon.R","mydir/example2/orange3_banana.R","mydir/example2/orange4_rock_melon.R","mydir/example2/orangered_date.R","mydir/example2/orangered1_jambul.R","mydir/example2/orangered2_physalis.R","mydir/example2/orangered3_ugli_fruit.R","mydir/example2/orangered4_jujube.R","mydir/example2/orchid_blueberry.R","mydir/example2/orchid1_cherry.R","mydir/example2/orchid2_clementine.R","mydir/example2/orchid3_orange.R","mydir/example2/orchid4_apple.R","mydir/example2/palegoldenrod_kiwi_fruit.R","mydir/example2/palegreen_physalis.R","mydir/example2/palegreen1_strawberry.R","mydir/example2/palegreen2_grape.R","mydir/example2/palegreen3_pineapple.R","mydir/example2/palegreen4_cranberry.R","mydir/example2/paleturquoise_blackberry.R","mydir/example2/paleturquoise1_cantaloupe.R","mydir/example2/paleturquoise2_purple_mangosteen.R","mydir/example2/paleturquoise3_persimmon.R","mydir/example2/paleturquoise4_damson.R","mydir/example2/palevioletred_fig.R","mydir/example2/palevioletred1_strawberry.R","mydir/example2/palevioletred2_guava.R","mydir/example2/palevioletred3_lemon.R","mydir/example2/palevioletred4_pomelo.R","mydir/example2/papayawhip_strawberry.R","mydir/example2/peachpuff_pomegranate.R","mydir/example2/peachpuff1_orange.R","mydir/example2/peachpuff2_nut.R","mydir/example2/peachpuff3_jambul.R","mydir/example2/peachpuff4_huckleberry.R","mydir/example2/peru_jackfruit.R","mydir/example2/pink_watermelon.R","mydir/example2/pink1_tamarillo.R","mydir/example2/pink2_jackfruit.R","mydir/example2/pink3_lime.R","mydir/example2/pink4_huckleberry.R","mydir/example2/plum_huckleberry.R","mydir/example2/plum1_cantaloupe.R","mydir/example2/plum2_lychee.R","mydir/example2/plum3_tangerine.R","mydir/example2/plum4_rambutan.R","mydir/example2/powderblue_damson.R","mydir/example2/purple_strawberry.R","mydir/example2/purple1_purple_mangosteen.R","mydir/example2/purple2_watermelon.R","mydir/example2/purple3_star_fruit.R","mydir/example2/purple4_lime.R","mydir/example2/red_jackfruit.R","mydir/example2/red1_jackfruit.R","mydir/example2/red2_clementine.R","mydir/example2/red3_grapefruit.R","mydir/example2/red4_ugli_fruit.R","mydir/example2/rosybrown_rambutan.R","mydir/example2/rosybrown1_goji_berry.R","mydir/example2/rosybrown2_jambul.R","mydir/example2/rosybrown3_satsuma.R","mydir/example2/rosybrown4_feijoa.R","mydir/example2/royalblue_date.R","mydir/example2/royalblue1_pear.R","mydir/example2/royalblue2_mandarine.R","mydir/example2/royalblue3_date.R","mydir/example2/royalblue4_purple_mangosteen.R","mydir/example2/saddlebrown_damson.R","mydir/example2/salmon_fig.R","mydir/example2/salmon1_kumquat.R","mydir/example2/salmon2_cranberry.R","mydir/example2/salmon3_eggplant.R","mydir/example2/salmon4_loquat.R","mydir/example2/sandybrown_grapefruit.R","mydir/example2/seagreen_star_fruit.R","mydir/example2/seagreen1_olive.R","mydir/example2/seagreen2_loquat.R","mydir/example2/seagreen3_mandarine.R","mydir/example2/seagreen4_damson.R","mydir/example2/seashell_guava.R","mydir/example2/seashell1_olive.R","mydir/example2/seashell2_pomegranate.R","mydir/example2/seashell3_clementine.R","mydir/example2/seashell4_jambul.R","mydir/example2/sienna_watermelon.R","mydir/example2/sienna1_star_fruit.R","mydir/example2/sienna2_currant.R","mydir/example2/sienna3_cucumber.R","mydir/example2/sienna4_salal_berry.R","mydir/example2/skyblue_pomegranate.R","mydir/example2/skyblue1_fig.R","mydir/example2/skyblue2_lime.R","mydir/example2/skyblue3_jujube.R","mydir/example2/skyblue4_pamelo.R","mydir/example2/slateblue_blood_orange.R","mydir/example2/slateblue1_feijoa.R","mydir/example2/slateblue2_rock_melon.R","mydir/example2/slateblue3_damson.R","mydir/example2/slateblue4_watermelon.R","mydir/example2/slategray_banana.R","mydir/example2/slategray1_tangerine.R","mydir/example2/slategray2_olive.R","mydir/example2/slategray3_fig.R","mydir/example2/slategray4_grapefruit.R","mydir/example2/slategrey_redcurrant.R","mydir/example2/snow_jujube.R","mydir/example2/snow1_redcurrant.R","mydir/example2/snow2_guava.R","mydir/example2/snow3_raspberry.R","mydir/example2/snow4_blackcurrant.R","mydir/example2/springgreen_bilberry.R","mydir/example2/springgreen1_apricot.R","mydir/example2/springgreen2_salal_berry.R","mydir/example2/springgreen3_huckleberry.R","mydir/example2/springgreen4_loquat.R","mydir/example2/steelblue_olive.R","mydir/example2/steelblue1_loquat.R","mydir/example2/steelblue2_avocado.R","mydir/example2/steelblue3_fig.R","mydir/example2/steelblue4_honeydew.R","mydir/example2/tan_guava.R","mydir/example2/tan1_damson.R","mydir/example2/tan2_pomegranate.R","mydir/example2/tan3_orange.R","mydir/example2/tan4_elderberry.R","mydir/example2/thistle_mango.R","mydir/example2/thistle1_kiwi_fruit.R","mydir/example2/thistle2_olive.R","mydir/example2/thistle3_mandarine.R","mydir/example2/thistle4_breadfruit.R","mydir/example2/tomato_salal_berry.R","mydir/example2/tomato1_pomegranate.R","mydir/example2/tomato2_tangerine.R","mydir/example2/tomato3_cranberry.R","mydir/example2/tomato4_mango.R","mydir/example2/turquoise_star_fruit.R","mydir/example2/turquoise1_goji_berry.R","mydir/example2/turquoise2_rambutan.R","mydir/example2/turquoise3_goji_berry.R","mydir/example2/turquoise4_blackcurrant.R","mydir/example2/violet_tamarillo.R","mydir/example2/violetred_olive.R","mydir/example2/violetred1_orange.R","mydir/example2/violetred2_breadfruit.R","mydir/example2/violetred3_fig.R","mydir/example2/violetred4_grape.R","mydir/example2/wheat_elderberry.R","mydir/example2/wheat1_eggplant.R","mydir/example2/wheat2_chili_pepper.R","mydir/example2/wheat3_persimmon.R","mydir/example2/wheat4_salal_berry.R","mydir/example2/white_peach.R","mydir/example2/whitesmoke_tangerine.R","mydir/example2/yellow_loquat.R","mydir/example2/yellow1_chili_pepper.R","mydir/example2/yellow2_honeydew.R","mydir/example2/yellow3_cranberry.R","mydir/example2/yellow4_lemon.R","mydir/example2/yellowgreen_raisin.R","mydir/example3/aliceblue_persimmon.R","mydir/example3/antiquewhite_salal_berry.R","mydir/example3/antiquewhite1_eggplant.R","mydir/example3/antiquewhite2_pamelo.R","mydir/example3/antiquewhite3_quince.R","mydir/example3/antiquewhite4_huckleberry.R","mydir/example3/aquamarine_pear.R","mydir/example3/aquamarine1_cucumber.R","mydir/example3/aquamarine2_eggplant.R","mydir/example3/aquamarine3_honeydew.R","mydir/example3/aquamarine4_pineapple.R","mydir/example3/azure_durian.R","mydir/example3/azure1_eggplant.R","mydir/example3/azure2_huckleberry.R","mydir/example3/azure3_grape.R","mydir/example3/azure4_dragonfruit.R","mydir/example3/beige_tamarillo.R","mydir/example3/bisque_salal_berry.R","mydir/example3/bisque1_goji_berry.R","mydir/example3/bisque2_cranberry.R","mydir/example3/bisque3_salal_berry.R","mydir/example3/bisque4_orange.R","mydir/example3/black_strawberry.R","mydir/example3/blanchedalmond_plum.R","mydir/example3/blue_lime.R","mydir/example3/blue1_ugli_fruit.R","mydir/example3/blue2_guava.R","mydir/example3/blue3_passionfruit.R","mydir/example3/blue4_cantaloupe.R","mydir/example3/blueviolet_coconut.R","mydir/example3/brown_pineapple.R","mydir/example3/brown1_canary_melon.R","mydir/example3/brown2_pear.R","mydir/example3/brown3_blackberry.R","mydir/example3/brown4_nectarine.R","mydir/example3/burlywood_grape.R","mydir/example3/burlywood1_clementine.R","mydir/example3/burlywood2_breadfruit.R","mydir/example3/burlywood3_cherimoya.R","mydir/example3/burlywood4_papaya.R","mydir/example3/cadetblue_gooseberry.R","mydir/example3/cadetblue1_cucumber.R","mydir/example3/cadetblue2_nut.R","mydir/example3/cadetblue3_elderberry.R","mydir/example3/cadetblue4_fig.R","mydir/example3/chartreuse_blueberry.R","mydir/example3/chartreuse1_plum.R","mydir/example3/chartreuse2_durian.R","mydir/example3/chartreuse3_kumquat.R","mydir/example3/chartreuse4_honeydew.R","mydir/example3/chocolate_canary_melon.R","mydir/example3/chocolate1_fig.R","mydir/example3/chocolate2_durian.R","mydir/example3/chocolate3_pineapple.R","mydir/example3/chocolate4_breadfruit.R","mydir/example3/coral_grape.R","mydir/example3/coral1_kumquat.R","mydir/example3/coral2_date.R","mydir/example3/coral3_currant.R","mydir/example3/coral4_gooseberry.R","mydir/example3/cornflowerblue_cucumber.R","mydir/example3/cornsilk_mulberry.R","mydir/example3/cornsilk1_kumquat.R","mydir/example3/cornsilk2_jujube.R","mydir/example3/cornsilk3_bilberry.R","mydir/example3/cornsilk4_damson.R","mydir/example3/cyan_purple_mangosteen.R","mydir/example3/cyan1_eggplant.R","mydir/example3/cyan2_goji_berry.R","mydir/example3/cyan3_durian.R","mydir/example3/cyan4_grape.R","mydir/example3/darkblue_blackberry.R","mydir/example3/darkcyan_peach.R","mydir/example3/darkgoldenrod_cloudberry.R","mydir/example3/darkgoldenrod1_mandarine.R","mydir/example3/darkgoldenrod2_currant.R","mydir/example3/darkgoldenrod3_cherry.R","mydir/example3/darkgoldenrod4_purple_mangosteen.R","mydir/example3/darkgray_kiwi_fruit.R","mydir/example3/darkgreen_cloudberry.R","mydir/example3/darkgrey_pomelo.R","mydir/example3/darkkhaki_dragonfruit.R","mydir/example3/darkmagenta_currant.R","mydir/example3/darkolivegreen_cucumber.R","mydir/example3/darkolivegreen1_grapefruit.R","mydir/example3/darkolivegreen2_mandarine.R","mydir/example3/darkolivegreen3_lime.R","mydir/example3/darkolivegreen4_eggplant.R","mydir/example3/darkorange_grapefruit.R","mydir/example3/darkorange1_strawberry.R","mydir/example3/darkorange2_cloudberry.R","mydir/example3/darkorange3_raspberry.R","mydir/example3/darkorange4_nut.R","mydir/example3/darkorchid_chili_pepper.R","mydir/example3/darkorchid1_blueberry.R","mydir/example3/darkorchid2_star_fruit.R","mydir/example3/darkorchid3_date.R","mydir/example3/darkorchid4_watermelon.R","mydir/example3/darkred_loquat.R","mydir/example3/darksalmon_blackberry.R","mydir/example3/darkseagreen_tamarillo.R","mydir/example3/darkseagreen1_apple.R","mydir/example3/darkseagreen2_cucumber.R","mydir/example3/darkseagreen3_cloudberry.R","mydir/example3/darkseagreen4_papaya.R","mydir/example3/darkslateblue_mulberry.R","mydir/example3/darkslategray_purple_mangosteen.R","mydir/example3/darkslategray1_boysenberry.R","mydir/example3/darkslategray2_watermelon.R","mydir/example3/darkslategray3_purple_mangosteen.R","mydir/example3/darkslategray4_kiwi_fruit.R","mydir/example3/darkslategrey_dragonfruit.R","mydir/example3/darkturquoise_strawberry.R","mydir/example3/darkviolet_cranberry.R","mydir/example3/deeppink_cucumber.R","mydir/example3/deeppink1_banana.R","mydir/example3/deeppink2_redcurrant.R","mydir/example3/deeppink3_blueberry.R","mydir/example3/deeppink4_banana.R","mydir/example3/deepskyblue_feijoa.R","mydir/example3/deepskyblue1_orange.R","mydir/example3/deepskyblue2_nectarine.R","mydir/example3/deepskyblue3_avocado.R","mydir/example3/deepskyblue4_tamarillo.R","mydir/example3/dimgray_nut.R","mydir/example3/dimgrey_breadfruit.R","mydir/example3/dodgerblue_durian.R","mydir/example3/dodgerblue1_star_fruit.R","mydir/example3/dodgerblue2_passionfruit.R","mydir/example3/dodgerblue3_jackfruit.R","mydir/example3/dodgerblue4_pear.R","mydir/example3/file_a.txt","mydir/example3/file_b.txt","mydir/example3/file_c.txt","mydir/example3/file_d.txt","mydir/example3/file_e.txt","mydir/example3/file_f.txt","mydir/example3/file_g.txt","mydir/example3/file_h.txt","mydir/example3/file_i.txt","mydir/example3/file_j.txt","mydir/example3/file_k.txt","mydir/example3/file_l.txt","mydir/example3/file_m.txt","mydir/example3/file_n.txt","mydir/example3/file_o.txt","mydir/example3/file_p.txt","mydir/example3/file_q.txt","mydir/example3/file_r.txt","mydir/example3/file_s.txt","mydir/example3/file_t.txt","mydir/example3/file_u.txt","mydir/example3/file_v.txt","mydir/example3/file_w.txt","mydir/example3/file_x.txt","mydir/example3/file_y.txt","mydir/example3/file_z.txt","mydir/example3/firebrick_raisin.R","mydir/example3/firebrick1_chili_pepper.R","mydir/example3/firebrick2_goji_berry.R","mydir/example3/firebrick3_cherimoya.R","mydir/example3/firebrick4_coconut.R","mydir/example3/floralwhite_satsuma.R","mydir/example3/forestgreen_bell_pepper.R","mydir/example3/gainsboro_bell_pepper.R","mydir/example3/ghostwhite_cantaloupe.R","mydir/example3/gold_grapefruit.R","mydir/example3/gold1_damson.R","mydir/example3/gold2_bell_pepper.R","mydir/example3/gold3_rock_melon.R","mydir/example3/gold4_cantaloupe.R","mydir/example3/goldenrod_satsuma.R","mydir/example3/goldenrod1_grape.R","mydir/example3/goldenrod2_nut.R","mydir/example3/goldenrod3_cucumber.R","mydir/example3/goldenrod4_tamarillo.R","mydir/example3/gray_passionfruit.R","mydir/example3/gray0_cloudberry.R","mydir/example3/gray1_lemon.R","mydir/example3/gray10_boysenberry.R","mydir/example3/gray100_persimmon.R","mydir/example3/gray11_cantaloupe.R","mydir/example3/gray12_pomelo.R","mydir/example3/gray13_damson.R","mydir/example3/gray14_plum.R","mydir/example3/gray15_jackfruit.R","mydir/example3/gray16_bilberry.R","mydir/example3/gray17_clementine.R","mydir/example3/gray18_quince.R","mydir/example3/gray19_banana.R","mydir/example3/gray2_apple.R","mydir/example3/gray20_redcurrant.R","mydir/example3/gray21_redcurrant.R","mydir/example3/gray22_kiwi_fruit.R","mydir/example3/gray23_rock_melon.R","mydir/example3/gray24_star_fruit.R","mydir/example3/gray25_apricot.R","mydir/example3/gray26_purple_mangosteen.R","mydir/example3/gray27_apple.R","mydir/example3/gray28_damson.R","mydir/example3/gray29_apple.R","mydir/example3/gray3_breadfruit.R","mydir/example3/gray30_pear.R","mydir/example3/gray31_lychee.R","mydir/example3/gray32_tamarillo.R","mydir/example3/gray33_blood_orange.R","mydir/example3/gray34_bilberry.R","mydir/example3/gray35_jujube.R","mydir/example3/gray36_raisin.R","mydir/example3/gray37_quince.R","mydir/example3/gray38_currant.R","mydir/example3/gray39_currant.R","mydir/example3/gray4_canary_melon.R","mydir/example3/gray40_huckleberry.R","mydir/example3/gray41_olive.R","mydir/example3/gray42_ugli_fruit.R","mydir/example3/gray43_satsuma.R","mydir/example3/gray44_coconut.R","mydir/example3/gray45_dragonfruit.R","mydir/example3/gray46_passionfruit.R","mydir/example3/gray47_rock_melon.R","mydir/example3/gray48_pineapple.R","mydir/example3/gray49_cucumber.R","mydir/example3/gray5_salal_berry.R","mydir/example3/gray50_strawberry.R","mydir/example3/gray51_lychee.R","mydir/example3/gray52_mango.R","mydir/example3/gray53_blueberry.R","mydir/example3/gray54_olive.R","mydir/example3/gray55_plum.R","mydir/example3/gray56_rambutan.R","mydir/example3/gray57_coconut.R","mydir/example3/gray58_persimmon.R","mydir/example3/gray59_pineapple.R","mydir/example3/gray6_cantaloupe.R","mydir/example3/gray60_strawberry.R","mydir/example3/gray61_raisin.R","mydir/example3/gray62_redcurrant.R","mydir/example3/gray63_honeydew.R","mydir/example3/gray64_lemon.R","mydir/example3/gray65_blackberry.R","mydir/example3/gray66_peach.R","mydir/example3/gray67_quince.R","mydir/example3/gray68_cherry.R","mydir/example3/gray69_coconut.R","mydir/example3/gray7_goji_berry.R","mydir/example3/gray70_mulberry.R","mydir/example3/gray71_loquat.R","mydir/example3/gray72_bilberry.R","mydir/example3/gray73_honeydew.R","mydir/example3/gray74_date.R","mydir/example3/gray75_nectarine.R","mydir/example3/gray76_jambul.R","mydir/example3/gray77_breadfruit.R","mydir/example3/gray78_honeydew.R","mydir/example3/gray79_jujube.R","mydir/example3/gray8_pear.R","mydir/example3/gray80_pomelo.R","mydir/example3/gray81_durian.R","mydir/example3/gray82_raisin.R","mydir/example3/gray83_blood_orange.R","mydir/example3/gray84_jambul.R","mydir/example3/gray85_lime.R","mydir/example3/gray86_plum.R","mydir/example3/gray87_passionfruit.R","mydir/example3/gray88_tangerine.R","mydir/example3/gray89_feijoa.R","mydir/example3/gray9_pomegranate.R","mydir/example3/gray90_chili_pepper.R","mydir/example3/gray91_pear.R","mydir/example3/gray92_olive.R","mydir/example3/gray93_persimmon.R","mydir/example3/gray94_pineapple.R","mydir/example3/gray95_rock_melon.R","mydir/example3/gray96_rambutan.R","mydir/example3/gray97_jambul.R","mydir/example3/gray98_pear.R","mydir/example3/gray99_orange.R","mydir/example3/green_kumquat.R","mydir/example3/green1_apricot.R","mydir/example3/green2_jujube.R","mydir/example3/green3_breadfruit.R","mydir/example3/green4_strawberry.R","mydir/example3/greenyellow_apricot.R","mydir/example3/grey_tamarillo.R","mydir/example3/grey0_boysenberry.R","mydir/example3/grey1_cucumber.R","mydir/example3/grey10_ugli_fruit.R","mydir/example3/grey100_grapefruit.R","mydir/example3/grey11_plum.R","mydir/example3/grey12_fig.R","mydir/example3/grey13_lemon.R","mydir/example3/grey14_jujube.R","mydir/example3/grey15_fig.R","mydir/example3/grey16_blueberry.R","mydir/example3/grey17_watermelon.R","mydir/example3/grey18_coconut.R","mydir/example3/grey19_durian.R","mydir/example3/grey2_feijoa.R","mydir/example3/grey20_strawberry.R","mydir/example3/grey21_jujube.R","mydir/example3/grey22_cherimoya.R","mydir/example3/grey23_blackcurrant.R","mydir/example3/grey24_orange.R","mydir/example3/grey25_grapefruit.R","mydir/example3/grey26_lemon.R","mydir/example3/grey27_rambutan.R","mydir/example3/grey28_olive.R","mydir/example3/grey29_fig.R","mydir/example3/grey3_coconut.R","mydir/example3/grey30_grapefruit.R","mydir/example3/grey31_pear.R","mydir/example3/grey32_raspberry.R","mydir/example3/grey33_apple.R","mydir/example3/grey34_tangerine.R","mydir/example3/grey35_physalis.R","mydir/example3/grey36_blueberry.R","mydir/example3/grey37_durian.R","mydir/example3/grey38_fig.R","mydir/example3/grey39_pamelo.R","mydir/example3/grey4_guava.R","mydir/example3/grey40_cantaloupe.R","mydir/example3/grey41_papaya.R","mydir/example3/grey42_goji_berry.R","mydir/example3/grey43_grape.R","mydir/example3/grey44_lemon.R","mydir/example3/grey45_apple.R","mydir/example3/grey46_cloudberry.R","mydir/example3/grey47_salal_berry.R","mydir/example3/grey48_quince.R","mydir/example3/grey49_star_fruit.R","mydir/example3/grey5_boysenberry.R","mydir/example3/grey50_jujube.R","mydir/example3/grey51_huckleberry.R","mydir/example3/grey52_date.R","mydir/example3/grey53_canary_melon.R","mydir/example3/grey54_physalis.R","mydir/example3/grey55_damson.R","mydir/example3/grey56_durian.R","mydir/example3/grey57_pomelo.R","mydir/example3/grey58_lychee.R","mydir/example3/grey59_elderberry.R","mydir/example3/grey6_lemon.R","mydir/example3/grey60_apple.R","mydir/example3/grey61_cucumber.R","mydir/example3/grey62_strawberry.R","mydir/example3/grey63_dragonfruit.R","mydir/example3/grey64_redcurrant.R","mydir/example3/grey65_kumquat.R","mydir/example3/grey66_quince.R","mydir/example3/grey67_purple_mangosteen.R","mydir/example3/grey68_ugli_fruit.R","mydir/example3/grey69_feijoa.R","mydir/example3/grey7_peach.R","mydir/example3/grey70_olive.R","mydir/example3/grey71_blackberry.R","mydir/example3/grey72_mulberry.R","mydir/example3/grey73_loquat.R","mydir/example3/grey74_tangerine.R","mydir/example3/grey75_redcurrant.R","mydir/example3/grey76_blackberry.R","mydir/example3/grey77_grape.R","mydir/example3/grey78_apricot.R","mydir/example3/grey79_gooseberry.R","mydir/example3/grey8_dragonfruit.R","mydir/example3/grey80_jujube.R","mydir/example3/grey81_mango.R","mydir/example3/grey82_star_fruit.R","mydir/example3/grey83_grapefruit.R","mydir/example3/grey84_peach.R","mydir/example3/grey85_raisin.R","mydir/example3/grey86_persimmon.R","mydir/example3/grey87_currant.R","mydir/example3/grey88_damson.R","mydir/example3/grey89_guava.R","mydir/example3/grey9_nectarine.R","mydir/example3/grey90_boysenberry.R","mydir/example3/grey91_raspberry.R","mydir/example3/grey92_cantaloupe.R","mydir/example3/grey93_blueberry.R","mydir/example3/grey94_nectarine.R","mydir/example3/grey95_jambul.R","mydir/example3/grey96_grape.R","mydir/example3/grey97_blackberry.R","mydir/example3/grey98_loquat.R","mydir/example3/grey99_persimmon.R","mydir/example3/honeydew_ugli_fruit.R","mydir/example3/honeydew1_star_fruit.R","mydir/example3/honeydew2_purple_mangosteen.R","mydir/example3/honeydew3_apricot.R","mydir/example3/honeydew4_peach.R","mydir/example3/hotpink_jambul.R","mydir/example3/hotpink1_gooseberry.R","mydir/example3/hotpink2_jambul.R","mydir/example3/hotpink3_jambul.R","mydir/example3/hotpink4_purple_mangosteen.R","mydir/example3/indianred_kiwi_fruit.R","mydir/example3/indianred1_jujube.R","mydir/example3/indianred2_dragonfruit.R","mydir/example3/indianred3_blueberry.R","mydir/example3/indianred4_raisin.R","mydir/example3/ivory_clementine.R","mydir/example3/ivory1_cantaloupe.R","mydir/example3/ivory2_gooseberry.R","mydir/example3/ivory3_jackfruit.R","mydir/example3/ivory4_watermelon.R","mydir/example3/khaki_tamarillo.R","mydir/example3/khaki1_cloudberry.R","mydir/example3/khaki2_date.R","mydir/example3/khaki3_pineapple.R","mydir/example3/khaki4_rock_melon.R","mydir/example3/lavender_avocado.R","mydir/example3/lavenderblush_persimmon.R","mydir/example3/lavenderblush1_watermelon.R","mydir/example3/lavenderblush2_tangerine.R","mydir/example3/lavenderblush3_rambutan.R","mydir/example3/lavenderblush4_mango.R","mydir/example3/lawngreen_tamarillo.R","mydir/example3/lemonchiffon_kiwi_fruit.R","mydir/example3/lemonchiffon1_salal_berry.R","mydir/example3/lemonchiffon2_tangerine.R","mydir/example3/lemonchiffon3_jambul.R","mydir/example3/lemonchiffon4_olive.R","mydir/example3/lightblue_canary_melon.R","mydir/example3/lightblue1_loquat.R","mydir/example3/lightblue2_blackcurrant.R","mydir/example3/lightblue3_nut.R","mydir/example3/lightblue4_ugli_fruit.R","mydir/example3/lightcoral_blueberry.R","mydir/example3/lightcyan_lemon.R","mydir/example3/lightcyan1_orange.R","mydir/example3/lightcyan2_rock_melon.R","mydir/example3/lightcyan3_jambul.R","mydir/example3/lightcyan4_cucumber.R","mydir/example3/lightgoldenrod_watermelon.R","mydir/example3/lightgoldenrod1_honeydew.R","mydir/example3/lightgoldenrod2_blackcurrant.R","mydir/example3/lightgoldenrod3_tamarillo.R","mydir/example3/lightgoldenrod4_bell_pepper.R","mydir/example3/lightgoldenrodyellow_chili_pepper.R","mydir/example3/lightgray_feijoa.R","mydir/example3/lightgreen_kumquat.R","mydir/example3/lightgrey_cloudberry.R","mydir/example3/lightpink_cantaloupe.R","mydir/example3/lightpink1_star_fruit.R","mydir/example3/lightpink2_salal_berry.R","mydir/example3/lightpink3_canary_melon.R","mydir/example3/lightpink4_peach.R","mydir/example3/lightsalmon_guava.R","mydir/example3/lightsalmon1_physalis.R","mydir/example3/lightsalmon2_avocado.R","mydir/example3/lightsalmon3_mango.R","mydir/example3/lightsalmon4_canary_melon.R","mydir/example3/lightseagreen_mango.R","mydir/example3/lightskyblue_dragonfruit.R","mydir/example3/lightskyblue1_tamarillo.R","mydir/example3/lightskyblue2_nut.R","mydir/example3/lightskyblue3_bell_pepper.R","mydir/example3/lightskyblue4_pear.R","mydir/example3/lightslateblue_watermelon.R","mydir/example3/lightslategray_pomelo.R","mydir/example3/lightslategrey_star_fruit.R","mydir/example3/lightsteelblue_peach.R","mydir/example3/lightsteelblue1_clementine.R","mydir/example3/lightsteelblue2_honeydew.R","mydir/example3/lightsteelblue3_fig.R","mydir/example3/lightsteelblue4_passionfruit.R","mydir/example3/lightyellow_chili_pepper.R","mydir/example3/lightyellow1_huckleberry.R","mydir/example3/lightyellow2_cherry.R","mydir/example3/lightyellow3_persimmon.R","mydir/example3/lightyellow4_mulberry.R","mydir/example3/limegreen_orange.R","mydir/example3/linen_elderberry.R","mydir/example3/magenta_apricot.R","mydir/example3/magenta1_blueberry.R","mydir/example3/magenta2_orange.R","mydir/example3/magenta3_pear.R","mydir/example3/magenta4_nut.R","mydir/example3/maroon_olive.R","mydir/example3/maroon1_blueberry.R","mydir/example3/maroon2_olive.R","mydir/example3/maroon3_plum.R","mydir/example3/maroon4_bell_pepper.R","mydir/example3/mediumaquamarine_blood_orange.R","mydir/example3/mediumblue_chili_pepper.R","mydir/example3/mediumorchid_huckleberry.R","mydir/example3/mediumorchid1_blood_orange.R","mydir/example3/mediumorchid2_lychee.R","mydir/example3/mediumorchid3_plum.R","mydir/example3/mediumorchid4_apple.R","mydir/example3/mediumpurple_rock_melon.R","mydir/example3/mediumpurple1_pear.R","mydir/example3/mediumpurple2_grape.R","mydir/example3/mediumpurple3_pear.R","mydir/example3/mediumpurple4_satsuma.R","mydir/example3/mediumseagreen_quince.R","mydir/example3/mediumslateblue_olive.R","mydir/example3/mediumspringgreen_cherimoya.R","mydir/example3/mediumturquoise_mulberry.R","mydir/example3/mediumvioletred_blood_orange.R","mydir/example3/midnightblue_apricot.R","mydir/example3/mintcream_peach.R","mydir/example3/mistyrose_passionfruit.R","mydir/example3/mistyrose1_loquat.R","mydir/example3/mistyrose2_tamarillo.R","mydir/example3/mistyrose3_cucumber.R","mydir/example3/mistyrose4_banana.R","mydir/example3/moccasin_jackfruit.R","mydir/example3/navajowhite_peach.R","mydir/example3/navajowhite1_mandarine.R","mydir/example3/navajowhite2_guava.R","mydir/example3/navajowhite3_lemon.R","mydir/example3/navajowhite4_salal_berry.R","mydir/example3/navy_star_fruit.R","mydir/example3/navyblue_cherry.R","mydir/example3/oldlace_clementine.R","mydir/example3/olivedrab_guava.R","mydir/example3/olivedrab1_jambul.R","mydir/example3/olivedrab2_apricot.R","mydir/example3/olivedrab3_physalis.R","mydir/example3/olivedrab4_lime.R","mydir/example3/orange_pineapple.R","mydir/example3/orange1_fig.R","mydir/example3/orange2_jujube.R","mydir/example3/orange3_gooseberry.R","mydir/example3/orange4_redcurrant.R","mydir/example3/orangered_avocado.R","mydir/example3/orangered1_goji_berry.R","mydir/example3/orangered2_olive.R","mydir/example3/orangered3_raspberry.R","mydir/example3/orangered4_pomelo.R","mydir/example3/orchid_pomelo.R","mydir/example3/orchid1_huckleberry.R","mydir/example3/orchid2_olive.R","mydir/example3/orchid3_mango.R","mydir/example3/orchid4_damson.R","mydir/example3/palegoldenrod_dragonfruit.R","mydir/example3/palegreen_cranberry.R","mydir/example3/palegreen1_lemon.R","mydir/example3/palegreen2_clementine.R","mydir/example3/palegreen3_lychee.R","mydir/example3/palegreen4_star_fruit.R","mydir/example3/paleturquoise_apple.R","mydir/example3/paleturquoise1_boysenberry.R","mydir/example3/paleturquoise2_damson.R","mydir/example3/paleturquoise3_dragonfruit.R","mydir/example3/paleturquoise4_bilberry.R","mydir/example3/palevioletred_peach.R","mydir/example3/palevioletred1_blood_orange.R","mydir/example3/palevioletred2_blueberry.R","mydir/example3/palevioletred3_rambutan.R","mydir/example3/palevioletred4_nectarine.R","mydir/example3/papayawhip_pamelo.R","mydir/example3/peachpuff_tamarillo.R","mydir/example3/peachpuff1_purple_mangosteen.R","mydir/example3/peachpuff2_canary_melon.R","mydir/example3/peachpuff3_honeydew.R","mydir/example3/peachpuff4_pineapple.R","mydir/example3/peru_cloudberry.R","mydir/example3/pink_lime.R","mydir/example3/pink1_purple_mangosteen.R","mydir/example3/pink2_pineapple.R","mydir/example3/pink3_blood_orange.R","mydir/example3/pink4_clementine.R","mydir/example3/plum_nut.R","mydir/example3/plum1_strawberry.R","mydir/example3/plum2_guava.R","mydir/example3/plum3_canary_melon.R","mydir/example3/plum4_physalis.R","mydir/example3/powderblue_cloudberry.R","mydir/example3/purple_huckleberry.R","mydir/example3/purple1_banana.R","mydir/example3/purple2_honeydew.R","mydir/example3/purple3_gooseberry.R","mydir/example3/purple4_honeydew.R","mydir/example3/red_grape.R","mydir/example3/red1_cranberry.R","mydir/example3/red2_loquat.R","mydir/example3/red3_nectarine.R","mydir/example3/red4_blackberry.R","mydir/example3/rosybrown_boysenberry.R","mydir/example3/rosybrown1_ugli_fruit.R","mydir/example3/rosybrown2_jambul.R","mydir/example3/rosybrown3_tangerine.R","mydir/example3/rosybrown4_tamarillo.R","mydir/example3/royalblue_pomegranate.R","mydir/example3/royalblue1_pomegranate.R","mydir/example3/royalblue2_watermelon.R","mydir/example3/royalblue3_apple.R","mydir/example3/royalblue4_cherimoya.R","mydir/example3/saddlebrown_breadfruit.R","mydir/example3/salmon_quince.R","mydir/example3/salmon1_loquat.R","mydir/example3/salmon2_kumquat.R","mydir/example3/salmon3_peach.R","mydir/example3/salmon4_passionfruit.R","mydir/example3/sandybrown_fig.R","mydir/example3/seagreen_cranberry.R","mydir/example3/seagreen1_quince.R","mydir/example3/seagreen2_pomegranate.R","mydir/example3/seagreen3_cucumber.R","mydir/example3/seagreen4_gooseberry.R","mydir/example3/seashell_kiwi_fruit.R","mydir/example3/seashell1_orange.R","mydir/example3/seashell2_mulberry.R","mydir/example3/seashell3_mango.R","mydir/example3/seashell4_watermelon.R","mydir/example3/sienna_orange.R","mydir/example3/sienna1_bilberry.R","mydir/example3/sienna2_avocado.R","mydir/example3/sienna3_passionfruit.R","mydir/example3/sienna4_cloudberry.R","mydir/example3/skyblue_nut.R","mydir/example3/skyblue1_jackfruit.R","mydir/example3/skyblue2_plum.R","mydir/example3/skyblue3_boysenberry.R","mydir/example3/skyblue4_cherimoya.R","mydir/example3/slateblue_guava.R","mydir/example3/slateblue1_peach.R","mydir/example3/slateblue2_guava.R","mydir/example3/slateblue3_gooseberry.R","mydir/example3/slateblue4_dragonfruit.R","mydir/example3/slategray_peach.R","mydir/example3/slategray1_raisin.R","mydir/example3/slategray2_fig.R","mydir/example3/slategray3_watermelon.R","mydir/example3/slategray4_date.R","mydir/example3/slategrey_raisin.R","mydir/example3/snow_salal_berry.R","mydir/example3/snow1_ugli_fruit.R","mydir/example3/snow2_breadfruit.R","mydir/example3/snow3_salal_berry.R","mydir/example3/snow4_jackfruit.R","mydir/example3/springgreen_pomegranate.R","mydir/example3/springgreen1_blackcurrant.R","mydir/example3/springgreen2_durian.R","mydir/example3/springgreen3_boysenberry.R","mydir/example3/springgreen4_chili_pepper.R","mydir/example3/steelblue_guava.R","mydir/example3/steelblue1_pomegranate.R","mydir/example3/steelblue2_passionfruit.R","mydir/example3/steelblue3_loquat.R","mydir/example3/steelblue4_physalis.R","mydir/example3/tan_loquat.R","mydir/example3/tan1_fig.R","mydir/example3/tan2_elderberry.R","mydir/example3/tan3_pamelo.R","mydir/example3/tan4_lemon.R","mydir/example3/thistle_goji_berry.R","mydir/example3/thistle1_rambutan.R","mydir/example3/thistle2_persimmon.R","mydir/example3/thistle3_ugli_fruit.R","mydir/example3/thistle4_guava.R","mydir/example3/tomato_star_fruit.R","mydir/example3/tomato1_grape.R","mydir/example3/tomato2_blackcurrant.R","mydir/example3/tomato3_blackcurrant.R","mydir/example3/tomato4_apricot.R","mydir/example3/turquoise_blueberry.R","mydir/example3/turquoise1_coconut.R","mydir/example3/turquoise2_plum.R","mydir/example3/turquoise3_apricot.R","mydir/example3/turquoise4_canary_melon.R","mydir/example3/violet_jambul.R","mydir/example3/violetred_plum.R","mydir/example3/violetred1_eggplant.R","mydir/example3/violetred2_gooseberry.R","mydir/example3/violetred3_star_fruit.R","mydir/example3/violetred4_pomelo.R","mydir/example3/wheat_grapefruit.R","mydir/example3/wheat1_ugli_fruit.R","mydir/example3/wheat2_strawberry.R","mydir/example3/wheat3_raisin.R","mydir/example3/wheat4_gooseberry.R","mydir/example3/white_pomelo.R","mydir/example3/whitesmoke_mandarine.R","mydir/example3/yellow_pomegranate.R","mydir/example3/yellow1_rambutan.R","mydir/example3/yellow2_guava.R","mydir/example3/yellow3_gooseberry.R","mydir/example3/yellow4_loquat.R","mydir/example3/yellowgreen_kumquat.R","mydir/example4/aliceblue_bell_pepper.R","mydir/example4/antiquewhite_date.R","mydir/example4/antiquewhite1_passionfruit.R","mydir/example4/antiquewhite2_olive.R","mydir/example4/antiquewhite3_breadfruit.R","mydir/example4/antiquewhite4_raspberry.R","mydir/example4/aquamarine_kumquat.R","mydir/example4/aquamarine1_pineapple.R","mydir/example4/aquamarine2_lime.R","mydir/example4/aquamarine3_persimmon.R","mydir/example4/aquamarine4_chili_pepper.R","mydir/example4/azure_pamelo.R","mydir/example4/azure1_bell_pepper.R","mydir/example4/azure2_pear.R","mydir/example4/azure3_persimmon.R","mydir/example4/azure4_bell_pepper.R","mydir/example4/beige_tangerine.R","mydir/example4/bisque_clementine.R","mydir/example4/bisque1_mulberry.R","mydir/example4/bisque2_durian.R","mydir/example4/bisque3_cantaloupe.R","mydir/example4/bisque4_cucumber.R","mydir/example4/black_jujube.R","mydir/example4/blanchedalmond_pear.R","mydir/example4/blue_bilberry.R","mydir/example4/blue1_cantaloupe.R","mydir/example4/blue2_jambul.R","mydir/example4/blue3_nectarine.R","mydir/example4/blue4_pamelo.R","mydir/example4/blueviolet_goji_berry.R","mydir/example4/brown_feijoa.R","mydir/example4/brown1_strawberry.R","mydir/example4/brown2_jambul.R","mydir/example4/brown3_quince.R","mydir/example4/brown4_pomelo.R","mydir/example4/burlywood_boysenberry.R","mydir/example4/burlywood1_salal_berry.R","mydir/example4/burlywood2_fig.R","mydir/example4/burlywood3_mandarine.R","mydir/example4/burlywood4_feijoa.R","mydir/example4/cadetblue_mandarine.R","mydir/example4/cadetblue1_pear.R","mydir/example4/cadetblue2_pomelo.R","mydir/example4/cadetblue3_damson.R","mydir/example4/cadetblue4_currant.R","mydir/example4/chartreuse_honeydew.R","mydir/example4/chartreuse1_physalis.R","mydir/example4/chartreuse2_date.R","mydir/example4/chartreuse3_persimmon.R","mydir/example4/chartreuse4_passionfruit.R","mydir/example4/chocolate_cloudberry.R","mydir/example4/chocolate1_banana.R","mydir/example4/chocolate2_eggplant.R","mydir/example4/chocolate3_huckleberry.R","mydir/example4/chocolate4_feijoa.R","mydir/example4/coral_jambul.R","mydir/example4/coral1_papaya.R","mydir/example4/coral2_mango.R","mydir/example4/coral3_cranberry.R","mydir/example4/coral4_dragonfruit.R","mydir/example4/cornflowerblue_nut.R","mydir/example4/cornsilk_avocado.R","mydir/example4/cornsilk1_quince.R","mydir/example4/cornsilk2_satsuma.R","mydir/example4/cornsilk3_plum.R","mydir/example4/cornsilk4_watermelon.R","mydir/example4/cyan_honeydew.R","mydir/example4/cyan1_rambutan.R","mydir/example4/cyan2_mulberry.R","mydir/example4/cyan3_olive.R","mydir/example4/cyan4_tamarillo.R","mydir/example4/darkblue_bilberry.R","mydir/example4/darkcyan_plum.R","mydir/example4/darkgoldenrod_blueberry.R","mydir/example4/darkgoldenrod1_dragonfruit.R","mydir/example4/darkgoldenrod2_gooseberry.R","mydir/example4/darkgoldenrod3_pineapple.R","mydir/example4/darkgoldenrod4_passionfruit.R","mydir/example4/darkgray_tangerine.R","mydir/example4/darkgreen_raspberry.R","mydir/example4/darkgrey_pineapple.R","mydir/example4/darkkhaki_breadfruit.R","mydir/example4/darkmagenta_goji_berry.R","mydir/example4/darkolivegreen_pamelo.R","mydir/example4/darkolivegreen1_jujube.R","mydir/example4/darkolivegreen2_clementine.R","mydir/example4/darkolivegreen3_breadfruit.R","mydir/example4/darkolivegreen4_peach.R","mydir/example4/darkorange_date.R","mydir/example4/darkorange1_kiwi_fruit.R","mydir/example4/darkorange2_coconut.R","mydir/example4/darkorange3_salal_berry.R","mydir/example4/darkorange4_dragonfruit.R","mydir/example4/darkorchid_tamarillo.R","mydir/example4/darkorchid1_honeydew.R","mydir/example4/darkorchid2_apple.R","mydir/example4/darkorchid3_cloudberry.R","mydir/example4/darkorchid4_cucumber.R","mydir/example4/darkred_raspberry.R","mydir/example4/darksalmon_durian.R","mydir/example4/darkseagreen_raspberry.R","mydir/example4/darkseagreen1_star_fruit.R","mydir/example4/darkseagreen2_kiwi_fruit.R","mydir/example4/darkseagreen3_chili_pepper.R","mydir/example4/darkseagreen4_mandarine.R","mydir/example4/darkslateblue_guava.R","mydir/example4/darkslategray_fig.R","mydir/example4/darkslategray1_cucumber.R","mydir/example4/darkslategray2_salal_berry.R","mydir/example4/darkslategray3_raisin.R","mydir/example4/darkslategray4_ugli_fruit.R","mydir/example4/darkslategrey_clementine.R","mydir/example4/darkturquoise_elderberry.R","mydir/example4/darkviolet_persimmon.R","mydir/example4/deeppink_clementine.R","mydir/example4/deeppink1_blackcurrant.R","mydir/example4/deeppink2_eggplant.R","mydir/example4/deeppink3_chili_pepper.R","mydir/example4/deeppink4_pomelo.R","mydir/example4/deepskyblue_satsuma.R","mydir/example4/deepskyblue1_pomegranate.R","mydir/example4/deepskyblue2_passionfruit.R","mydir/example4/deepskyblue3_plum.R","mydir/example4/deepskyblue4_papaya.R","mydir/example4/dimgray_dragonfruit.R","mydir/example4/dimgrey_nut.R","mydir/example4/dodgerblue_bilberry.R","mydir/example4/dodgerblue1_tamarillo.R","mydir/example4/dodgerblue2_cherry.R","mydir/example4/dodgerblue3_nut.R","mydir/example4/dodgerblue4_olive.R","mydir/example4/file_a.txt","mydir/example4/file_b.txt","mydir/example4/file_c.txt","mydir/example4/file_d.txt","mydir/example4/file_e.txt","mydir/example4/file_f.txt","mydir/example4/file_g.txt","mydir/example4/file_h.txt","mydir/example4/file_i.txt","mydir/example4/file_j.txt","mydir/example4/file_k.txt","mydir/example4/file_l.txt","mydir/example4/file_m.txt","mydir/example4/file_n.txt","mydir/example4/file_o.txt","mydir/example4/file_p.txt","mydir/example4/file_q.txt","mydir/example4/file_r.txt","mydir/example4/file_s.txt","mydir/example4/file_t.txt","mydir/example4/file_u.txt","mydir/example4/file_v.txt","mydir/example4/file_w.txt","mydir/example4/file_x.txt","mydir/example4/file_y.txt","mydir/example4/file_z.txt","mydir/example4/firebrick_jackfruit.R","mydir/example4/firebrick1_orange.R","mydir/example4/firebrick2_coconut.R","mydir/example4/firebrick3_chili_pepper.R","mydir/example4/firebrick4_mandarine.R","mydir/example4/floralwhite_ugli_fruit.R","mydir/example4/forestgreen_pomegranate.R","mydir/example4/gainsboro_mandarine.R","mydir/example4/ghostwhite_mango.R","mydir/example4/gold_blueberry.R","mydir/example4/gold1_avocado.R","mydir/example4/gold2_blackberry.R","mydir/example4/gold3_mandarine.R","mydir/example4/gold4_grape.R","mydir/example4/goldenrod_physalis.R","mydir/example4/goldenrod1_watermelon.R","mydir/example4/goldenrod2_avocado.R","mydir/example4/goldenrod3_grapefruit.R","mydir/example4/goldenrod4_apricot.R","mydir/example4/gray_plum.R","mydir/example4/gray0_cherry.R","mydir/example4/gray1_damson.R","mydir/example4/gray10_blackberry.R","mydir/example4/gray100_banana.R","mydir/example4/gray11_date.R","mydir/example4/gray12_kiwi_fruit.R","mydir/example4/gray13_ugli_fruit.R","mydir/example4/gray14_cherry.R","mydir/example4/gray15_kiwi_fruit.R","mydir/example4/gray16_clementine.R","mydir/example4/gray17_passionfruit.R","mydir/example4/gray18_persimmon.R","mydir/example4/gray19_passionfruit.R","mydir/example4/gray2_guava.R","mydir/example4/gray20_jujube.R","mydir/example4/gray21_canary_melon.R","mydir/example4/gray22_lime.R","mydir/example4/gray23_apricot.R","mydir/example4/gray24_jambul.R","mydir/example4/gray25_raisin.R","mydir/example4/gray26_huckleberry.R","mydir/example4/gray27_kiwi_fruit.R","mydir/example4/gray28_eggplant.R","mydir/example4/gray29_redcurrant.R","mydir/example4/gray3_cantaloupe.R","mydir/example4/gray30_physalis.R","mydir/example4/gray31_blackberry.R","mydir/example4/gray32_currant.R","mydir/example4/gray33_durian.R","mydir/example4/gray34_blueberry.R","mydir/example4/gray35_redcurrant.R","mydir/example4/gray36_persimmon.R","mydir/example4/gray37_blood_orange.R","mydir/example4/gray38_cherry.R","mydir/example4/gray39_rambutan.R","mydir/example4/gray4_mandarine.R","mydir/example4/gray40_clementine.R","mydir/example4/gray41_lime.R","mydir/example4/gray42_mulberry.R","mydir/example4/gray43_purple_mangosteen.R","mydir/example4/gray44_cantaloupe.R","mydir/example4/gray45_rambutan.R","mydir/example4/gray46_mango.R","mydir/example4/gray47_cranberry.R","mydir/example4/gray48_grapefruit.R","mydir/example4/gray49_passionfruit.R","mydir/example4/gray5_cantaloupe.R","mydir/example4/gray50_durian.R","mydir/example4/gray51_banana.R","mydir/example4/gray52_cherry.R","mydir/example4/gray53_rambutan.R","mydir/example4/gray54_raspberry.R","mydir/example4/gray55_coconut.R","mydir/example4/gray56_apple.R","mydir/example4/gray57_blueberry.R","mydir/example4/gray58_avocado.R","mydir/example4/gray59_strawberry.R","mydir/example4/gray6_elderberry.R","mydir/example4/gray60_orange.R","mydir/example4/gray61_blackcurrant.R","mydir/example4/gray62_date.R","mydir/example4/gray63_pomegranate.R","mydir/example4/gray64_dragonfruit.R","mydir/example4/gray65_olive.R","mydir/example4/gray66_satsuma.R","mydir/example4/gray67_gooseberry.R","mydir/example4/gray68_lychee.R","mydir/example4/gray69_peach.R","mydir/example4/gray7_purple_mangosteen.R","mydir/example4/gray70_mandarine.R","mydir/example4/gray71_boysenberry.R","mydir/example4/gray72_boysenberry.R","mydir/example4/gray73_boysenberry.R","mydir/example4/gray74_guava.R","mydir/example4/gray75_chili_pepper.R","mydir/example4/gray76_papaya.R","mydir/example4/gray77_apple.R","mydir/example4/gray78_canary_melon.R","mydir/example4/gray79_durian.R","mydir/example4/gray8_durian.R","mydir/example4/gray80_mulberry.R","mydir/example4/gray81_bell_pepper.R","mydir/example4/gray82_guava.R","mydir/example4/gray83_rambutan.R","mydir/example4/gray84_blueberry.R","mydir/example4/gray85_nut.R","mydir/example4/gray86_mulberry.R","mydir/example4/gray87_quince.R","mydir/example4/gray88_eggplant.R","mydir/example4/gray89_blackberry.R","mydir/example4/gray9_cherimoya.R","mydir/example4/gray90_peach.R","mydir/example4/gray91_jackfruit.R","mydir/example4/gray92_coconut.R","mydir/example4/gray93_nut.R","mydir/example4/gray94_lemon.R","mydir/example4/gray95_tamarillo.R","mydir/example4/gray96_kumquat.R","mydir/example4/gray97_guava.R","mydir/example4/gray98_blackberry.R","mydir/example4/gray99_fig.R","mydir/example4/green_cranberry.R","mydir/example4/green1_blood_orange.R","mydir/example4/green2_tamarillo.R","mydir/example4/green3_lime.R","mydir/example4/green4_jujube.R","mydir/example4/greenyellow_lychee.R","mydir/example4/grey_kiwi_fruit.R","mydir/example4/grey0_quince.R","mydir/example4/grey1_bell_pepper.R","mydir/example4/grey10_raisin.R","mydir/example4/grey100_dragonfruit.R","mydir/example4/grey11_currant.R","mydir/example4/grey12_mulberry.R","mydir/example4/grey13_mandarine.R","mydir/example4/grey14_jambul.R","mydir/example4/grey15_lychee.R","mydir/example4/grey16_currant.R","mydir/example4/grey17_quince.R","mydir/example4/grey18_cherimoya.R","mydir/example4/grey19_nut.R","mydir/example4/grey2_passionfruit.R","mydir/example4/grey20_nectarine.R","mydir/example4/grey21_lemon.R","mydir/example4/grey22_jackfruit.R","mydir/example4/grey23_durian.R","mydir/example4/grey24_cloudberry.R","mydir/example4/grey25_cherry.R","mydir/example4/grey26_tangerine.R","mydir/example4/grey27_kiwi_fruit.R","mydir/example4/grey28_cherimoya.R","mydir/example4/grey29_redcurrant.R","mydir/example4/grey3_tamarillo.R","mydir/example4/grey30_bilberry.R","mydir/example4/grey31_quince.R","mydir/example4/grey32_durian.R","mydir/example4/grey33_date.R","mydir/example4/grey34_rock_melon.R","mydir/example4/grey35_mulberry.R","mydir/example4/grey36_tamarillo.R","mydir/example4/grey37_pineapple.R","mydir/example4/grey38_passionfruit.R","mydir/example4/grey39_pear.R","mydir/example4/grey4_kiwi_fruit.R","mydir/example4/grey40_boysenberry.R","mydir/example4/grey41_blueberry.R","mydir/example4/grey42_fig.R","mydir/example4/grey43_raisin.R","mydir/example4/grey44_fig.R","mydir/example4/grey45_rambutan.R","mydir/example4/grey46_canary_melon.R","mydir/example4/grey47_grapefruit.R","mydir/example4/grey48_blackberry.R","mydir/example4/grey49_goji_berry.R","mydir/example4/grey5_honeydew.R","mydir/example4/grey50_fig.R","mydir/example4/grey51_purple_mangosteen.R","mydir/example4/grey52_bell_pepper.R","mydir/example4/grey53_elderberry.R","mydir/example4/grey54_satsuma.R","mydir/example4/grey55_currant.R","mydir/example4/grey56_currant.R","mydir/example4/grey57_grape.R","mydir/example4/grey58_jackfruit.R","mydir/example4/grey59_lime.R","mydir/example4/grey6_pear.R","mydir/example4/grey60_orange.R","mydir/example4/grey61_papaya.R","mydir/example4/grey62_blackberry.R","mydir/example4/grey63_jambul.R","mydir/example4/grey64_apricot.R","mydir/example4/grey65_goji_berry.R","mydir/example4/grey66_date.R","mydir/example4/grey67_cherimoya.R","mydir/example4/grey68_grape.R","mydir/example4/grey69_rambutan.R","mydir/example4/grey7_plum.R","mydir/example4/grey70_goji_berry.R","mydir/example4/grey71_pomelo.R","mydir/example4/grey72_mandarine.R","mydir/example4/grey73_redcurrant.R","mydir/example4/grey74_goji_berry.R","mydir/example4/grey75_star_fruit.R","mydir/example4/grey76_plum.R","mydir/example4/grey77_coconut.R","mydir/example4/grey78_tangerine.R","mydir/example4/grey79_loquat.R","mydir/example4/grey8_cloudberry.R","mydir/example4/grey80_jujube.R","mydir/example4/grey81_cloudberry.R","mydir/example4/grey82_kiwi_fruit.R","mydir/example4/grey83_honeydew.R","mydir/example4/grey84_raspberry.R","mydir/example4/grey85_honeydew.R","mydir/example4/grey86_cucumber.R","mydir/example4/grey87_pomelo.R","mydir/example4/grey88_pear.R","mydir/example4/grey89_loquat.R","mydir/example4/grey9_cantaloupe.R","mydir/example4/grey90_mulberry.R","mydir/example4/grey91_watermelon.R","mydir/example4/grey92_pear.R","mydir/example4/grey93_cucumber.R","mydir/example4/grey94_mandarine.R","mydir/example4/grey95_orange.R","mydir/example4/grey96_dragonfruit.R","mydir/example4/grey97_apple.R","mydir/example4/grey98_grapefruit.R","mydir/example4/grey99_pomegranate.R","mydir/example4/honeydew_bell_pepper.R","mydir/example4/honeydew1_jujube.R","mydir/example4/honeydew2_apricot.R","mydir/example4/honeydew3_mandarine.R","mydir/example4/honeydew4_kiwi_fruit.R","mydir/example4/hotpink_peach.R","mydir/example4/hotpink1_banana.R","mydir/example4/hotpink2_cherry.R","mydir/example4/hotpink3_apple.R","mydir/example4/hotpink4_blackberry.R","mydir/example4/indianred_cloudberry.R","mydir/example4/indianred1_olive.R","mydir/example4/indianred2_pineapple.R","mydir/example4/indianred3_kiwi_fruit.R","mydir/example4/indianred4_jambul.R","mydir/example4/ivory_durian.R","mydir/example4/ivory1_watermelon.R","mydir/example4/ivory2_dragonfruit.R","mydir/example4/ivory3_rambutan.R","mydir/example4/ivory4_nectarine.R","mydir/example4/khaki_huckleberry.R","mydir/example4/khaki1_canary_melon.R","mydir/example4/khaki2_mango.R","mydir/example4/khaki3_star_fruit.R","mydir/example4/khaki4_blackcurrant.R","mydir/example4/lavender_canary_melon.R","mydir/example4/lavenderblush_guava.R","mydir/example4/lavenderblush1_loquat.R","mydir/example4/lavenderblush2_tamarillo.R","mydir/example4/lavenderblush3_gooseberry.R","mydir/example4/lavenderblush4_nut.R","mydir/example4/lawngreen_watermelon.R","mydir/example4/lemonchiffon_clementine.R","mydir/example4/lemonchiffon1_quince.R","mydir/example4/lemonchiffon2_banana.R","mydir/example4/lemonchiffon3_date.R","mydir/example4/lemonchiffon4_olive.R","mydir/example4/lightblue_elderberry.R","mydir/example4/lightblue1_breadfruit.R","mydir/example4/lightblue2_passionfruit.R","mydir/example4/lightblue3_pineapple.R","mydir/example4/lightblue4_cloudberry.R","mydir/example4/lightcoral_star_fruit.R","mydir/example4/lightcyan_coconut.R","mydir/example4/lightcyan1_guava.R","mydir/example4/lightcyan2_pineapple.R","mydir/example4/lightcyan3_lime.R","mydir/example4/lightcyan4_loquat.R","mydir/example4/lightgoldenrod_bilberry.R","mydir/example4/lightgoldenrod1_elderberry.R","mydir/example4/lightgoldenrod2_banana.R","mydir/example4/lightgoldenrod3_banana.R","mydir/example4/lightgoldenrod4_loquat.R","mydir/example4/lightgoldenrodyellow_gooseberry.R","mydir/example4/lightgray_banana.R","mydir/example4/lightgreen_grapefruit.R","mydir/example4/lightgrey_cherry.R","mydir/example4/lightpink_cantaloupe.R","mydir/example4/lightpink1_persimmon.R","mydir/example4/lightpink2_watermelon.R","mydir/example4/lightpink3_olive.R","mydir/example4/lightpink4_blackberry.R","mydir/example4/lightsalmon_eggplant.R","mydir/example4/lightsalmon1_clementine.R","mydir/example4/lightsalmon2_watermelon.R","mydir/example4/lightsalmon3_durian.R","mydir/example4/lightsalmon4_pamelo.R","mydir/example4/lightseagreen_feijoa.R","mydir/example4/lightskyblue_pomegranate.R","mydir/example4/lightskyblue1_durian.R","mydir/example4/lightskyblue2_jackfruit.R","mydir/example4/lightskyblue3_persimmon.R","mydir/example4/lightskyblue4_bilberry.R","mydir/example4/lightslateblue_apricot.R","mydir/example4/lightslategray_clementine.R","mydir/example4/lightslategrey_ugli_fruit.R","mydir/example4/lightsteelblue_dragonfruit.R","mydir/example4/lightsteelblue1_jujube.R","mydir/example4/lightsteelblue2_tamarillo.R","mydir/example4/lightsteelblue3_kumquat.R","mydir/example4/lightsteelblue4_loquat.R","mydir/example4/lightyellow_durian.R","mydir/example4/lightyellow1_mango.R","mydir/example4/lightyellow2_banana.R","mydir/example4/lightyellow3_date.R","mydir/example4/lightyellow4_cantaloupe.R","mydir/example4/limegreen_dragonfruit.R","mydir/example4/linen_chili_pepper.R","mydir/example4/magenta_cherry.R","mydir/example4/magenta1_ugli_fruit.R","mydir/example4/magenta2_cherimoya.R","mydir/example4/magenta3_papaya.R","mydir/example4/magenta4_loquat.R","mydir/example4/maroon_rambutan.R","mydir/example4/maroon1_cloudberry.R","mydir/example4/maroon2_ugli_fruit.R","mydir/example4/maroon3_tangerine.R","mydir/example4/maroon4_eggplant.R","mydir/example4/mediumaquamarine_pear.R","mydir/example4/mediumblue_mulberry.R","mydir/example4/mediumorchid_durian.R","mydir/example4/mediumorchid1_plum.R","mydir/example4/mediumorchid2_ugli_fruit.R","mydir/example4/mediumorchid3_nut.R","mydir/example4/mediumorchid4_honeydew.R","mydir/example4/mediumpurple_salal_berry.R","mydir/example4/mediumpurple1_peach.R","mydir/example4/mediumpurple2_bell_pepper.R","mydir/example4/mediumpurple3_eggplant.R","mydir/example4/mediumpurple4_pear.R","mydir/example4/mediumseagreen_orange.R","mydir/example4/mediumslateblue_breadfruit.R","mydir/example4/mediumspringgreen_huckleberry.R","mydir/example4/mediumturquoise_pomelo.R","mydir/example4/mediumvioletred_quince.R","mydir/example4/midnightblue_mandarine.R","mydir/example4/mintcream_avocado.R","mydir/example4/mistyrose_goji_berry.R","mydir/example4/mistyrose1_blueberry.R","mydir/example4/mistyrose2_raspberry.R","mydir/example4/mistyrose3_loquat.R","mydir/example4/mistyrose4_loquat.R","mydir/example4/moccasin_cantaloupe.R","mydir/example4/navajowhite_pear.R","mydir/example4/navajowhite1_kiwi_fruit.R","mydir/example4/navajowhite2_rambutan.R","mydir/example4/navajowhite3_jackfruit.R","mydir/example4/navajowhite4_jambul.R","mydir/example4/navy_apple.R","mydir/example4/navyblue_nut.R","mydir/example4/oldlace_physalis.R","mydir/example4/olivedrab_jujube.R","mydir/example4/olivedrab1_feijoa.R","mydir/example4/olivedrab2_passionfruit.R","mydir/example4/olivedrab3_cherimoya.R","mydir/example4/olivedrab4_peach.R","mydir/example4/orange_orange.R","mydir/example4/orange1_honeydew.R","mydir/example4/orange2_passionfruit.R","mydir/example4/orange3_rock_melon.R","mydir/example4/orange4_currant.R","mydir/example4/orangered_jambul.R","mydir/example4/orangered1_raisin.R","mydir/example4/orangered2_strawberry.R","mydir/example4/orangered3_dragonfruit.R","mydir/example4/orangered4_guava.R","mydir/example4/orchid_pamelo.R","mydir/example4/orchid1_elderberry.R","mydir/example4/orchid2_lemon.R","mydir/example4/orchid3_purple_mangosteen.R","mydir/example4/orchid4_damson.R","mydir/example4/palegoldenrod_pineapple.R","mydir/example4/palegreen_clementine.R","mydir/example4/palegreen1_goji_berry.R","mydir/example4/palegreen2_tangerine.R","mydir/example4/palegreen3_honeydew.R","mydir/example4/palegreen4_star_fruit.R","mydir/example4/paleturquoise_quince.R","mydir/example4/paleturquoise1_avocado.R","mydir/example4/paleturquoise2_currant.R","mydir/example4/paleturquoise3_blackcurrant.R","mydir/example4/paleturquoise4_chili_pepper.R","mydir/example4/palevioletred_purple_mangosteen.R","mydir/example4/palevioletred1_lemon.R","mydir/example4/palevioletred2_tangerine.R","mydir/example4/palevioletred3_orange.R","mydir/example4/palevioletred4_honeydew.R","mydir/example4/papayawhip_mulberry.R","mydir/example4/peachpuff_tangerine.R","mydir/example4/peachpuff1_satsuma.R","mydir/example4/peachpuff2_orange.R","mydir/example4/peachpuff3_currant.R","mydir/example4/peachpuff4_mango.R","mydir/example4/peru_cucumber.R","mydir/example4/pink_gooseberry.R","mydir/example4/pink1_salal_berry.R","mydir/example4/pink2_bilberry.R","mydir/example4/pink3_fig.R","mydir/example4/pink4_quince.R","mydir/example4/plum_pear.R","mydir/example4/plum1_lemon.R","mydir/example4/plum2_bell_pepper.R","mydir/example4/plum3_cantaloupe.R","mydir/example4/plum4_raspberry.R","mydir/example4/powderblue_bilberry.R","mydir/example4/purple_tamarillo.R","mydir/example4/purple1_blackcurrant.R","mydir/example4/purple2_grape.R","mydir/example4/purple3_grapefruit.R","mydir/example4/purple4_banana.R","mydir/example4/red_purple_mangosteen.R","mydir/example4/red1_redcurrant.R","mydir/example4/red2_tamarillo.R","mydir/example4/red3_huckleberry.R","mydir/example4/red4_cloudberry.R","mydir/example4/rosybrown_blueberry.R","mydir/example4/rosybrown1_persimmon.R","mydir/example4/rosybrown2_grapefruit.R","mydir/example4/rosybrown3_orange.R","mydir/example4/rosybrown4_apricot.R","mydir/example4/royalblue_cucumber.R","mydir/example4/royalblue1_cucumber.R","mydir/example4/royalblue2_eggplant.R","mydir/example4/royalblue3_cherimoya.R","mydir/example4/royalblue4_jambul.R","mydir/example4/saddlebrown_feijoa.R","mydir/example4/salmon_grapefruit.R","mydir/example4/salmon1_strawberry.R","mydir/example4/salmon2_quince.R","mydir/example4/salmon3_canary_melon.R","mydir/example4/salmon4_breadfruit.R","mydir/example4/sandybrown_date.R","mydir/example4/seagreen_cherimoya.R","mydir/example4/seagreen1_jackfruit.R","mydir/example4/seagreen2_fig.R","mydir/example4/seagreen3_mulberry.R","mydir/example4/seagreen4_olive.R","mydir/example4/seashell_cucumber.R","mydir/example4/seashell1_honeydew.R","mydir/example4/seashell2_feijoa.R","mydir/example4/seashell3_quince.R","mydir/example4/seashell4_papaya.R","mydir/example4/sienna_lychee.R","mydir/example4/sienna1_purple_mangosteen.R","mydir/example4/sienna2_physalis.R","mydir/example4/sienna3_damson.R","mydir/example4/sienna4_strawberry.R","mydir/example4/skyblue_damson.R","mydir/example4/skyblue1_durian.R","mydir/example4/skyblue2_pomegranate.R","mydir/example4/skyblue3_cantaloupe.R","mydir/example4/skyblue4_star_fruit.R","mydir/example4/slateblue_watermelon.R","mydir/example4/slateblue1_papaya.R","mydir/example4/slateblue2_date.R","mydir/example4/slateblue3_lime.R","mydir/example4/slateblue4_kumquat.R","mydir/example4/slategray_orange.R","mydir/example4/slategray1_lychee.R","mydir/example4/slategray2_elderberry.R","mydir/example4/slategray3_mulberry.R","mydir/example4/slategray4_grape.R","mydir/example4/slategrey_cranberry.R","mydir/example4/snow_peach.R","mydir/example4/snow1_blood_orange.R","mydir/example4/snow2_breadfruit.R","mydir/example4/snow3_jujube.R","mydir/example4/snow4_blood_orange.R","mydir/example4/springgreen_pineapple.R","mydir/example4/springgreen1_star_fruit.R","mydir/example4/springgreen2_star_fruit.R","mydir/example4/springgreen3_nectarine.R","mydir/example4/springgreen4_satsuma.R","mydir/example4/steelblue_passionfruit.R","mydir/example4/steelblue1_huckleberry.R","mydir/example4/steelblue2_watermelon.R","mydir/example4/steelblue3_honeydew.R","mydir/example4/steelblue4_grape.R","mydir/example4/tan_kiwi_fruit.R","mydir/example4/tan1_peach.R","mydir/example4/tan2_damson.R","mydir/example4/tan3_raisin.R","mydir/example4/tan4_kiwi_fruit.R","mydir/example4/thistle_avocado.R","mydir/example4/thistle1_jackfruit.R","mydir/example4/thistle2_avocado.R","mydir/example4/thistle3_olive.R","mydir/example4/thistle4_orange.R","mydir/example4/tomato_banana.R","mydir/example4/tomato1_banana.R","mydir/example4/tomato2_papaya.R","mydir/example4/tomato3_apricot.R","mydir/example4/tomato4_star_fruit.R","mydir/example4/turquoise_star_fruit.R","mydir/example4/turquoise1_cloudberry.R","mydir/example4/turquoise2_redcurrant.R","mydir/example4/turquoise3_quince.R","mydir/example4/turquoise4_loquat.R","mydir/example4/violet_cranberry.R","mydir/example4/violetred_strawberry.R","mydir/example4/violetred1_avocado.R","mydir/example4/violetred2_feijoa.R","mydir/example4/violetred3_cherry.R","mydir/example4/violetred4_purple_mangosteen.R","mydir/example4/wheat_lemon.R","mydir/example4/wheat1_bilberry.R","mydir/example4/wheat2_peach.R","mydir/example4/wheat3_lemon.R","mydir/example4/wheat4_cranberry.R","mydir/example4/white_jackfruit.R","mydir/example4/whitesmoke_quince.R","mydir/example4/yellow_raisin.R","mydir/example4/yellow1_pomegranate.R","mydir/example4/yellow2_blackcurrant.R","mydir/example4/yellow3_olive.R","mydir/example4/yellow4_pomelo.R","mydir/example4/yellowgreen_durian.R","mydir/example5/aliceblue_persimmon.R","mydir/example5/antiquewhite_huckleberry.R","mydir/example5/antiquewhite1_banana.R","mydir/example5/antiquewhite2_blackberry.R","mydir/example5/antiquewhite3_loquat.R","mydir/example5/antiquewhite4_mulberry.R","mydir/example5/aquamarine_clementine.R","mydir/example5/aquamarine1_pomelo.R","mydir/example5/aquamarine2_passionfruit.R","mydir/example5/aquamarine3_honeydew.R","mydir/example5/aquamarine4_canary_melon.R","mydir/example5/azure_fig.R","mydir/example5/azure1_watermelon.R","mydir/example5/azure2_pear.R","mydir/example5/azure3_canary_melon.R","mydir/example5/azure4_canary_melon.R","mydir/example5/beige_cantaloupe.R","mydir/example5/bisque_dragonfruit.R","mydir/example5/bisque1_quince.R","mydir/example5/bisque2_olive.R","mydir/example5/bisque3_boysenberry.R","mydir/example5/bisque4_guava.R","mydir/example5/black_blood_orange.R","mydir/example5/blanchedalmond_salal_berry.R","mydir/example5/blue_blood_orange.R","mydir/example5/blue1_lime.R","mydir/example5/blue2_elderberry.R","mydir/example5/blue3_physalis.R","mydir/example5/blue4_pamelo.R","mydir/example5/blueviolet_avocado.R","mydir/example5/brown_cherimoya.R","mydir/example5/brown1_blackberry.R","mydir/example5/brown2_kiwi_fruit.R","mydir/example5/brown3_pamelo.R","mydir/example5/brown4_jujube.R","mydir/example5/burlywood_fig.R","mydir/example5/burlywood1_mulberry.R","mydir/example5/burlywood2_cloudberry.R","mydir/example5/burlywood3_guava.R","mydir/example5/burlywood4_cucumber.R","mydir/example5/cadetblue_avocado.R","mydir/example5/cadetblue1_apricot.R","mydir/example5/cadetblue2_ugli_fruit.R","mydir/example5/cadetblue3_orange.R","mydir/example5/cadetblue4_raspberry.R","mydir/example5/chartreuse_gooseberry.R","mydir/example5/chartreuse1_strawberry.R","mydir/example5/chartreuse2_cherry.R","mydir/example5/chartreuse3_quince.R","mydir/example5/chartreuse4_bilberry.R","mydir/example5/chocolate_damson.R","mydir/example5/chocolate1_coconut.R","mydir/example5/chocolate2_grapefruit.R","mydir/example5/chocolate3_grape.R","mydir/example5/chocolate4_persimmon.R","mydir/example5/coral_nectarine.R","mydir/example5/coral1_mango.R","mydir/example5/coral2_currant.R","mydir/example5/coral3_jackfruit.R","mydir/example5/coral4_eggplant.R","mydir/example5/cornflowerblue_lemon.R","mydir/example5/cornsilk_lemon.R","mydir/example5/cornsilk1_blueberry.R","mydir/example5/cornsilk2_elderberry.R","mydir/example5/cornsilk3_ugli_fruit.R","mydir/example5/cornsilk4_papaya.R","mydir/example5/cyan_canary_melon.R","mydir/example5/cyan1_olive.R","mydir/example5/cyan2_gooseberry.R","mydir/example5/cyan3_lychee.R","mydir/example5/cyan4_cranberry.R","mydir/example5/darkblue_orange.R","mydir/example5/darkcyan_boysenberry.R","mydir/example5/darkgoldenrod_plum.R","mydir/example5/darkgoldenrod1_cloudberry.R","mydir/example5/darkgoldenrod2_grapefruit.R","mydir/example5/darkgoldenrod3_jackfruit.R","mydir/example5/darkgoldenrod4_lime.R","mydir/example5/darkgray_nut.R","mydir/example5/darkgreen_goji_berry.R","mydir/example5/darkgrey_strawberry.R","mydir/example5/darkkhaki_purple_mangosteen.R","mydir/example5/darkmagenta_coconut.R","mydir/example5/darkolivegreen_apple.R","mydir/example5/darkolivegreen1_quince.R","mydir/example5/darkolivegreen2_peach.R","mydir/example5/darkolivegreen3_elderberry.R","mydir/example5/darkolivegreen4_tangerine.R","mydir/example5/darkorange_redcurrant.R","mydir/example5/darkorange1_banana.R","mydir/example5/darkorange2_feijoa.R","mydir/example5/darkorange3_salal_berry.R","mydir/example5/darkorange4_nectarine.R","mydir/example5/darkorchid_cherry.R","mydir/example5/darkorchid1_quince.R","mydir/example5/darkorchid2_goji_berry.R","mydir/example5/darkorchid3_raisin.R","mydir/example5/darkorchid4_dragonfruit.R","mydir/example5/darkred_papaya.R","mydir/example5/darksalmon_date.R","mydir/example5/darkseagreen_ugli_fruit.R","mydir/example5/darkseagreen1_mulberry.R","mydir/example5/darkseagreen2_durian.R","mydir/example5/darkseagreen3_papaya.R","mydir/example5/darkseagreen4_grape.R","mydir/example5/darkslateblue_loquat.R","mydir/example5/darkslategray_satsuma.R","mydir/example5/darkslategray1_cloudberry.R","mydir/example5/darkslategray2_currant.R","mydir/example5/darkslategray3_huckleberry.R","mydir/example5/darkslategray4_purple_mangosteen.R","mydir/example5/darkslategrey_jambul.R","mydir/example5/darkturquoise_jujube.R","mydir/example5/darkviolet_cantaloupe.R","mydir/example5/deeppink_loquat.R","mydir/example5/deeppink1_raisin.R","mydir/example5/deeppink2_satsuma.R","mydir/example5/deeppink3_orange.R","mydir/example5/deeppink4_blackcurrant.R","mydir/example5/deepskyblue_cherimoya.R","mydir/example5/deepskyblue1_kumquat.R","mydir/example5/deepskyblue2_bell_pepper.R","mydir/example5/deepskyblue3_durian.R","mydir/example5/deepskyblue4_blackcurrant.R","mydir/example5/dimgray_tangerine.R","mydir/example5/dimgrey_grape.R","mydir/example5/dodgerblue_nut.R","mydir/example5/dodgerblue1_cranberry.R","mydir/example5/dodgerblue2_nut.R","mydir/example5/dodgerblue3_quince.R","mydir/example5/dodgerblue4_kiwi_fruit.R","mydir/example5/file_a.txt","mydir/example5/file_b.txt","mydir/example5/file_c.txt","mydir/example5/file_d.txt","mydir/example5/file_e.txt","mydir/example5/file_f.txt","mydir/example5/file_g.txt","mydir/example5/file_h.txt","mydir/example5/file_i.txt","mydir/example5/file_j.txt","mydir/example5/file_k.txt","mydir/example5/file_l.txt","mydir/example5/file_m.txt","mydir/example5/file_n.txt","mydir/example5/file_o.txt","mydir/example5/file_p.txt","mydir/example5/file_q.txt","mydir/example5/file_r.txt","mydir/example5/file_s.txt","mydir/example5/file_t.txt","mydir/example5/file_u.txt","mydir/example5/file_v.txt","mydir/example5/file_w.txt","mydir/example5/file_x.txt","mydir/example5/file_y.txt","mydir/example5/file_z.txt","mydir/example5/firebrick_canary_melon.R","mydir/example5/firebrick1_canary_melon.R","mydir/example5/firebrick2_ugli_fruit.R","mydir/example5/firebrick3_pear.R","mydir/example5/firebrick4_lime.R","mydir/example5/floralwhite_jambul.R","mydir/example5/forestgreen_huckleberry.R","mydir/example5/gainsboro_nut.R","mydir/example5/ghostwhite_pomegranate.R","mydir/example5/gold_peach.R","mydir/example5/gold1_avocado.R","mydir/example5/gold2_loquat.R","mydir/example5/gold3_canary_melon.R","mydir/example5/gold4_orange.R","mydir/example5/goldenrod_cherry.R","mydir/example5/goldenrod1_strawberry.R","mydir/example5/goldenrod2_grape.R","mydir/example5/goldenrod3_tangerine.R","mydir/example5/goldenrod4_elderberry.R","mydir/example5/gray_tamarillo.R","mydir/example5/gray0_goji_berry.R","mydir/example5/gray1_tamarillo.R","mydir/example5/gray10_pomegranate.R","mydir/example5/gray100_ugli_fruit.R","mydir/example5/gray11_lemon.R","mydir/example5/gray12_dragonfruit.R","mydir/example5/gray13_pamelo.R","mydir/example5/gray14_durian.R","mydir/example5/gray15_peach.R","mydir/example5/gray16_mulberry.R","mydir/example5/gray17_pear.R","mydir/example5/gray18_peach.R","mydir/example5/gray19_physalis.R","mydir/example5/gray2_damson.R","mydir/example5/gray20_jujube.R","mydir/example5/gray21_raspberry.R","mydir/example5/gray22_pineapple.R","mydir/example5/gray23_pomegranate.R","mydir/example5/gray24_kumquat.R","mydir/example5/gray25_kiwi_fruit.R","mydir/example5/gray26_fig.R","mydir/example5/gray27_tangerine.R","mydir/example5/gray28_breadfruit.R","mydir/example5/gray29_apricot.R","mydir/example5/gray3_fig.R","mydir/example5/gray30_tangerine.R","mydir/example5/gray31_kumquat.R","mydir/example5/gray32_blackcurrant.R","mydir/example5/gray33_rock_melon.R","mydir/example5/gray34_raspberry.R","mydir/example5/gray35_lychee.R","mydir/example5/gray36_cloudberry.R","mydir/example5/gray37_cherimoya.R","mydir/example5/gray38_passionfruit.R","mydir/example5/gray39_purple_mangosteen.R","mydir/example5/gray4_coconut.R","mydir/example5/gray40_pear.R","mydir/example5/gray41_blackberry.R","mydir/example5/gray42_persimmon.R","mydir/example5/gray43_breadfruit.R","mydir/example5/gray44_cucumber.R","mydir/example5/gray45_redcurrant.R","mydir/example5/gray46_redcurrant.R","mydir/example5/gray47_orange.R","mydir/example5/gray48_breadfruit.R","mydir/example5/gray49_blackcurrant.R","mydir/example5/gray5_nectarine.R","mydir/example5/gray50_bell_pepper.R","mydir/example5/gray51_huckleberry.R","mydir/example5/gray52_kiwi_fruit.R","mydir/example5/gray53_passionfruit.R","mydir/example5/gray54_kumquat.R","mydir/example5/gray55_blackcurrant.R","mydir/example5/gray56_cherry.R","mydir/example5/gray57_raisin.R","mydir/example5/gray58_peach.R","mydir/example5/gray59_boysenberry.R","mydir/example5/gray6_loquat.R","mydir/example5/gray60_lemon.R","mydir/example5/gray61_watermelon.R","mydir/example5/gray62_date.R","mydir/example5/gray63_pomegranate.R","mydir/example5/gray64_cantaloupe.R","mydir/example5/gray65_blackberry.R","mydir/example5/gray66_cherry.R","mydir/example5/gray67_avocado.R","mydir/example5/gray68_elderberry.R","mydir/example5/gray69_kiwi_fruit.R","mydir/example5/gray7_chili_pepper.R","mydir/example5/gray70_dragonfruit.R","mydir/example5/gray71_quince.R","mydir/example5/gray72_gooseberry.R","mydir/example5/gray73_lychee.R","mydir/example5/gray74_raisin.R","mydir/example5/gray75_feijoa.R","mydir/example5/gray76_avocado.R","mydir/example5/gray77_peach.R","mydir/example5/gray78_jambul.R","mydir/example5/gray79_fig.R","mydir/example5/gray8_rambutan.R","mydir/example5/gray80_strawberry.R","mydir/example5/gray81_nut.R","mydir/example5/gray82_canary_melon.R","mydir/example5/gray83_breadfruit.R","mydir/example5/gray84_honeydew.R","mydir/example5/gray85_raspberry.R","mydir/example5/gray86_lemon.R","mydir/example5/gray87_blackberry.R","mydir/example5/gray88_huckleberry.R","mydir/example5/gray89_blackberry.R","mydir/example5/gray9_papaya.R","mydir/example5/gray90_plum.R","mydir/example5/gray91_fig.R","mydir/example5/gray92_jackfruit.R","mydir/example5/gray93_pineapple.R","mydir/example5/gray94_canary_melon.R","mydir/example5/gray95_ugli_fruit.R","mydir/example5/gray96_blueberry.R","mydir/example5/gray97_redcurrant.R","mydir/example5/gray98_salal_berry.R","mydir/example5/gray99_lychee.R","mydir/example5/green_quince.R","mydir/example5/green1_apricot.R","mydir/example5/green2_avocado.R","mydir/example5/green3_watermelon.R","mydir/example5/green4_nectarine.R","mydir/example5/greenyellow_clementine.R","mydir/example5/grey_blueberry.R","mydir/example5/grey0_chili_pepper.R","mydir/example5/grey1_raisin.R","mydir/example5/grey10_tangerine.R","mydir/example5/grey100_blackcurrant.R","mydir/example5/grey11_quince.R","mydir/example5/grey12_plum.R","mydir/example5/grey13_guava.R","mydir/example5/grey14_pamelo.R","mydir/example5/grey15_salal_berry.R","mydir/example5/grey16_peach.R","mydir/example5/grey17_physalis.R","mydir/example5/grey18_cherimoya.R","mydir/example5/grey19_avocado.R","mydir/example5/grey2_canary_melon.R","mydir/example5/grey20_tangerine.R","mydir/example5/grey21_raisin.R","mydir/example5/grey22_blueberry.R","mydir/example5/grey23_mandarine.R","mydir/example5/grey24_grapefruit.R","mydir/example5/grey25_mandarine.R","mydir/example5/grey26_jujube.R","mydir/example5/grey27_tamarillo.R","mydir/example5/grey28_lychee.R","mydir/example5/grey29_goji_berry.R","mydir/example5/grey3_breadfruit.R","mydir/example5/grey30_olive.R","mydir/example5/grey31_mulberry.R","mydir/example5/grey32_mango.R","mydir/example5/grey33_durian.R","mydir/example5/grey34_persimmon.R","mydir/example5/grey35_nut.R","mydir/example5/grey36_bilberry.R","mydir/example5/grey37_bell_pepper.R","mydir/example5/grey38_blackberry.R","mydir/example5/grey39_blood_orange.R","mydir/example5/grey4_huckleberry.R","mydir/example5/grey40_goji_berry.R","mydir/example5/grey41_purple_mangosteen.R","mydir/example5/grey42_kumquat.R","mydir/example5/grey43_fig.R","mydir/example5/grey44_avocado.R","mydir/example5/grey45_nectarine.R","mydir/example5/grey46_canary_melon.R","mydir/example5/grey47_blueberry.R","mydir/example5/grey48_plum.R","mydir/example5/grey49_rambutan.R","mydir/example5/grey5_olive.R","mydir/example5/grey50_breadfruit.R","mydir/example5/grey51_blackcurrant.R","mydir/example5/grey52_nectarine.R","mydir/example5/grey53_fig.R","mydir/example5/grey54_canary_melon.R","mydir/example5/grey55_goji_berry.R","mydir/example5/grey56_rock_melon.R","mydir/example5/grey57_blackcurrant.R","mydir/example5/grey58_durian.R","mydir/example5/grey59_cantaloupe.R","mydir/example5/grey6_pear.R","mydir/example5/grey60_pear.R","mydir/example5/grey61_mulberry.R","mydir/example5/grey62_mango.R","mydir/example5/grey63_cucumber.R","mydir/example5/grey64_rock_melon.R","mydir/example5/grey65_satsuma.R","mydir/example5/grey66_honeydew.R","mydir/example5/grey67_satsuma.R","mydir/example5/grey68_huckleberry.R","mydir/example5/grey69_lychee.R","mydir/example5/grey7_peach.R","mydir/example5/grey70_star_fruit.R","mydir/example5/grey71_peach.R","mydir/example5/grey72_satsuma.R","mydir/example5/grey73_pamelo.R","mydir/example5/grey74_gooseberry.R","mydir/example5/grey75_fig.R","mydir/example5/grey76_lychee.R","mydir/example5/grey77_grape.R","mydir/example5/grey78_goji_berry.R","mydir/example5/grey79_cucumber.R","mydir/example5/grey8_blueberry.R","mydir/example5/grey80_date.R","mydir/example5/grey81_lime.R","mydir/example5/grey82_elderberry.R","mydir/example5/grey83_pomelo.R","mydir/example5/grey84_blackcurrant.R","mydir/example5/grey85_jackfruit.R","mydir/example5/grey86_mulberry.R","mydir/example5/grey87_guava.R","mydir/example5/grey88_boysenberry.R","mydir/example5/grey89_kumquat.R","mydir/example5/grey9_redcurrant.R","mydir/example5/grey90_papaya.R","mydir/example5/grey91_huckleberry.R","mydir/example5/grey92_jujube.R","mydir/example5/grey93_blood_orange.R","mydir/example5/grey94_jujube.R","mydir/example5/grey95_pear.R","mydir/example5/grey96_pear.R","mydir/example5/grey97_avocado.R","mydir/example5/grey98_papaya.R","mydir/example5/grey99_raspberry.R","mydir/example5/honeydew_dragonfruit.R","mydir/example5/honeydew1_huckleberry.R","mydir/example5/honeydew2_damson.R","mydir/example5/honeydew3_honeydew.R","mydir/example5/honeydew4_pomelo.R","mydir/example5/hotpink_papaya.R","mydir/example5/hotpink1_tamarillo.R","mydir/example5/hotpink2_cherimoya.R","mydir/example5/hotpink3_avocado.R","mydir/example5/hotpink4_apricot.R","mydir/example5/indianred_goji_berry.R","mydir/example5/indianred1_tangerine.R","mydir/example5/indianred2_jambul.R","mydir/example5/indianred3_honeydew.R","mydir/example5/indianred4_goji_berry.R","mydir/example5/ivory_nut.R","mydir/example5/ivory1_tangerine.R","mydir/example5/ivory2_dragonfruit.R","mydir/example5/ivory3_kiwi_fruit.R","mydir/example5/ivory4_blood_orange.R","mydir/example5/khaki_mandarine.R","mydir/example5/khaki1_coconut.R","mydir/example5/khaki2_pineapple.R","mydir/example5/khaki3_rock_melon.R","mydir/example5/khaki4_mulberry.R","mydir/example5/lavender_kiwi_fruit.R","mydir/example5/lavenderblush_avocado.R","mydir/example5/lavenderblush1_gooseberry.R","mydir/example5/lavenderblush2_blackberry.R","mydir/example5/lavenderblush3_avocado.R","mydir/example5/lavenderblush4_damson.R","mydir/example5/lawngreen_lime.R","mydir/example5/lemonchiffon_pomegranate.R","mydir/example5/lemonchiffon1_salal_berry.R","mydir/example5/lemonchiffon2_coconut.R","mydir/example5/lemonchiffon3_jackfruit.R","mydir/example5/lemonchiffon4_cherimoya.R","mydir/example5/lightblue_papaya.R","mydir/example5/lightblue1_cucumber.R","mydir/example5/lightblue2_cherry.R","mydir/example5/lightblue3_lemon.R","mydir/example5/lightblue4_coconut.R","mydir/example5/lightcoral_huckleberry.R","mydir/example5/lightcyan_guava.R","mydir/example5/lightcyan1_loquat.R","mydir/example5/lightcyan2_orange.R","mydir/example5/lightcyan3_bell_pepper.R","mydir/example5/lightcyan4_canary_melon.R","mydir/example5/lightgoldenrod_huckleberry.R","mydir/example5/lightgoldenrod1_persimmon.R","mydir/example5/lightgoldenrod2_star_fruit.R","mydir/example5/lightgoldenrod3_grapefruit.R","mydir/example5/lightgoldenrod4_cherimoya.R","mydir/example5/lightgoldenrodyellow_nut.R","mydir/example5/lightgray_rambutan.R","mydir/example5/lightgreen_plum.R","mydir/example5/lightgrey_blackberry.R","mydir/example5/lightpink_orange.R","mydir/example5/lightpink1_blood_orange.R","mydir/example5/lightpink2_quince.R","mydir/example5/lightpink3_watermelon.R","mydir/example5/lightpink4_gooseberry.R","mydir/example5/lightsalmon_grape.R","mydir/example5/lightsalmon1_blackcurrant.R","mydir/example5/lightsalmon2_lime.R","mydir/example5/lightsalmon3_blackcurrant.R","mydir/example5/lightsalmon4_apple.R","mydir/example5/lightseagreen_pomegranate.R","mydir/example5/lightskyblue_pear.R","mydir/example5/lightskyblue1_nectarine.R","mydir/example5/lightskyblue2_apricot.R","mydir/example5/lightskyblue3_lemon.R","mydir/example5/lightskyblue4_lime.R","mydir/example5/lightslateblue_grapefruit.R","mydir/example5/lightslategray_coconut.R","mydir/example5/lightslategrey_pomegranate.R","mydir/example5/lightsteelblue_cherimoya.R","mydir/example5/lightsteelblue1_cherry.R","mydir/example5/lightsteelblue2_canary_melon.R","mydir/example5/lightsteelblue3_loquat.R","mydir/example5/lightsteelblue4_grape.R","mydir/example5/lightyellow_passionfruit.R","mydir/example5/lightyellow1_orange.R","mydir/example5/lightyellow2_cherimoya.R","mydir/example5/lightyellow3_salal_berry.R","mydir/example5/lightyellow4_orange.R","mydir/example5/limegreen_peach.R","mydir/example5/linen_pomegranate.R","mydir/example5/magenta_elderberry.R","mydir/example5/magenta1_tangerine.R","mydir/example5/magenta2_kumquat.R","mydir/example5/magenta3_canary_melon.R","mydir/example5/magenta4_blackberry.R","mydir/example5/maroon_pomegranate.R","mydir/example5/maroon1_mandarine.R","mydir/example5/maroon2_pineapple.R","mydir/example5/maroon3_tamarillo.R","mydir/example5/maroon4_pomegranate.R","mydir/example5/mediumaquamarine_pomelo.R","mydir/example5/mediumblue_pear.R","mydir/example5/mediumorchid_guava.R","mydir/example5/mediumorchid1_breadfruit.R","mydir/example5/mediumorchid2_currant.R","mydir/example5/mediumorchid3_pomegranate.R","mydir/example5/mediumorchid4_orange.R","mydir/example5/mediumpurple_blueberry.R","mydir/example5/mediumpurple1_boysenberry.R","mydir/example5/mediumpurple2_pear.R","mydir/example5/mediumpurple3_satsuma.R","mydir/example5/mediumpurple4_coconut.R","mydir/example5/mediumseagreen_tangerine.R","mydir/example5/mediumslateblue_cherimoya.R","mydir/example5/mediumspringgreen_physalis.R","mydir/example5/mediumturquoise_rambutan.R","mydir/example5/mediumvioletred_bell_pepper.R","mydir/example5/midnightblue_tamarillo.R","mydir/example5/mintcream_cherry.R","mydir/example5/mistyrose_lemon.R","mydir/example5/mistyrose1_blackcurrant.R","mydir/example5/mistyrose2_peach.R","mydir/example5/mistyrose3_mulberry.R","mydir/example5/mistyrose4_cherry.R","mydir/example5/moccasin_star_fruit.R","mydir/example5/navajowhite_coconut.R","mydir/example5/navajowhite1_lime.R","mydir/example5/navajowhite2_papaya.R","mydir/example5/navajowhite3_coconut.R","mydir/example5/navajowhite4_quince.R","mydir/example5/navy_rock_melon.R","mydir/example5/navyblue_strawberry.R","mydir/example5/oldlace_apricot.R","mydir/example5/olivedrab_grape.R","mydir/example5/olivedrab1_blackcurrant.R","mydir/example5/olivedrab2_lychee.R","mydir/example5/olivedrab3_loquat.R","mydir/example5/olivedrab4_mandarine.R","mydir/example5/orange_cucumber.R","mydir/example5/orange1_salal_berry.R","mydir/example5/orange2_purple_mangosteen.R","mydir/example5/orange3_guava.R","mydir/example5/orange4_watermelon.R","mydir/example5/orangered_jackfruit.R","mydir/example5/orangered1_persimmon.R","mydir/example5/orangered2_mulberry.R","mydir/example5/orangered3_elderberry.R","mydir/example5/orangered4_rambutan.R","mydir/example5/orchid_rock_melon.R","mydir/example5/orchid1_tamarillo.R","mydir/example5/orchid2_cucumber.R","mydir/example5/orchid3_cherry.R","mydir/example5/orchid4_star_fruit.R","mydir/example5/palegoldenrod_jujube.R","mydir/example5/palegreen_redcurrant.R","mydir/example5/palegreen1_bell_pepper.R","mydir/example5/palegreen2_coconut.R","mydir/example5/palegreen3_nut.R","mydir/example5/palegreen4_lemon.R","mydir/example5/paleturquoise_rambutan.R","mydir/example5/paleturquoise1_honeydew.R","mydir/example5/paleturquoise2_currant.R","mydir/example5/paleturquoise3_mango.R","mydir/example5/paleturquoise4_salal_berry.R","mydir/example5/palevioletred_nectarine.R","mydir/example5/palevioletred1_pomelo.R","mydir/example5/palevioletred2_chili_pepper.R","mydir/example5/palevioletred3_blueberry.R","mydir/example5/palevioletred4_purple_mangosteen.R","mydir/example5/papayawhip_pineapple.R","mydir/example5/peachpuff_boysenberry.R","mydir/example5/peachpuff1_kiwi_fruit.R","mydir/example5/peachpuff2_goji_berry.R","mydir/example5/peachpuff3_blueberry.R","mydir/example5/peachpuff4_cantaloupe.R","mydir/example5/peru_blueberry.R","mydir/example5/pink_blood_orange.R","mydir/example5/pink1_physalis.R","mydir/example5/pink2_fig.R","mydir/example5/pink3_rock_melon.R","mydir/example5/pink4_raisin.R","mydir/example5/plum_lychee.R","mydir/example5/plum1_passionfruit.R","mydir/example5/plum2_olive.R","mydir/example5/plum3_quince.R","mydir/example5/plum4_watermelon.R","mydir/example5/powderblue_jambul.R","mydir/example5/purple_mango.R","mydir/example5/purple1_olive.R","mydir/example5/purple2_salal_berry.R","mydir/example5/purple3_plum.R","mydir/example5/purple4_bilberry.R","mydir/example5/red_cloudberry.R","mydir/example5/red1_pamelo.R","mydir/example5/red2_apricot.R","mydir/example5/red3_quince.R","mydir/example5/red4_pomegranate.R","mydir/example5/rosybrown_kiwi_fruit.R","mydir/example5/rosybrown1_plum.R","mydir/example5/rosybrown2_canary_melon.R","mydir/example5/rosybrown3_gooseberry.R","mydir/example5/rosybrown4_jackfruit.R","mydir/example5/royalblue_strawberry.R","mydir/example5/royalblue1_apricot.R","mydir/example5/royalblue2_jackfruit.R","mydir/example5/royalblue3_passionfruit.R","mydir/example5/royalblue4_jujube.R","mydir/example5/saddlebrown_coconut.R","mydir/example5/salmon_grape.R","mydir/example5/salmon1_cherimoya.R","mydir/example5/salmon2_orange.R","mydir/example5/salmon3_bell_pepper.R","mydir/example5/salmon4_plum.R","mydir/example5/sandybrown_clementine.R","mydir/example5/seagreen_banana.R","mydir/example5/seagreen1_raspberry.R","mydir/example5/seagreen2_pomelo.R","mydir/example5/seagreen3_peach.R","mydir/example5/seagreen4_feijoa.R","mydir/example5/seashell_cherry.R","mydir/example5/seashell1_boysenberry.R","mydir/example5/seashell2_apple.R","mydir/example5/seashell3_pear.R","mydir/example5/seashell4_damson.R","mydir/example5/sienna_lime.R","mydir/example5/sienna1_gooseberry.R","mydir/example5/sienna2_avocado.R","mydir/example5/sienna3_feijoa.R","mydir/example5/sienna4_papaya.R","mydir/example5/skyblue_honeydew.R","mydir/example5/skyblue1_mulberry.R","mydir/example5/skyblue2_ugli_fruit.R","mydir/example5/skyblue3_jambul.R","mydir/example5/skyblue4_lemon.R","mydir/example5/slateblue_blackberry.R","mydir/example5/slateblue1_mulberry.R","mydir/example5/slateblue2_strawberry.R","mydir/example5/slateblue3_breadfruit.R","mydir/example5/slateblue4_jambul.R","mydir/example5/slategray_pineapple.R","mydir/example5/slategray1_guava.R","mydir/example5/slategray2_canary_melon.R","mydir/example5/slategray3_nectarine.R","mydir/example5/slategray4_jambul.R","mydir/example5/slategrey_plum.R","mydir/example5/snow_pineapple.R","mydir/example5/snow1_blackberry.R","mydir/example5/snow2_plum.R","mydir/example5/snow3_goji_berry.R","mydir/example5/snow4_watermelon.R","mydir/example5/springgreen_blackberry.R","mydir/example5/springgreen1_purple_mangosteen.R","mydir/example5/springgreen2_raisin.R","mydir/example5/springgreen3_cranberry.R","mydir/example5/springgreen4_mango.R","mydir/example5/steelblue_lemon.R","mydir/example5/steelblue1_jackfruit.R","mydir/example5/steelblue2_quince.R","mydir/example5/steelblue3_satsuma.R","mydir/example5/steelblue4_pineapple.R","mydir/example5/tan_honeydew.R","mydir/example5/tan1_lemon.R","mydir/example5/tan2_fig.R","mydir/example5/tan3_huckleberry.R","mydir/example5/tan4_jambul.R","mydir/example5/thistle_cucumber.R","mydir/example5/thistle1_tangerine.R","mydir/example5/thistle2_dragonfruit.R","mydir/example5/thistle3_grapefruit.R","mydir/example5/thistle4_goji_berry.R","mydir/example5/tomato_bilberry.R","mydir/example5/tomato1_quince.R","mydir/example5/tomato2_honeydew.R","mydir/example5/tomato3_blackberry.R","mydir/example5/tomato4_orange.R","mydir/example5/turquoise_mandarine.R","mydir/example5/turquoise1_watermelon.R","mydir/example5/turquoise2_honeydew.R","mydir/example5/turquoise3_eggplant.R","mydir/example5/turquoise4_grape.R","mydir/example5/violet_watermelon.R","mydir/example5/violetred_kumquat.R","mydir/example5/violetred1_chili_pepper.R","mydir/example5/violetred2_satsuma.R","mydir/example5/violetred3_apple.R","mydir/example5/violetred4_lemon.R","mydir/example5/wheat_purple_mangosteen.R","mydir/example5/wheat1_cantaloupe.R","mydir/example5/wheat2_bell_pepper.R","mydir/example5/wheat3_grape.R","mydir/example5/wheat4_blueberry.R","mydir/example5/white_olive.R","mydir/example5/whitesmoke_quince.R","mydir/example5/yellow_nectarine.R","mydir/example5/yellow1_jambul.R","mydir/example5/yellow2_watermelon.R","mydir/example5/yellow3_plum.R","mydir/example5/yellow4_nectarine.R","mydir/example5/yellowgreen_bilberry.R","welcome/welcome_files/bowser-1.9.3/bowser.min.js","welcome/welcome_files/distill-2.2.21/template.v2.js","welcome/welcome_files/jquery-1.11.3/jquery.min.js","welcome/welcome_files/webcomponents-2.0.0/webcomponents.js","welcome/welcome.html","welcome/welcome.Rmd"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #455a64;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative;}
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+</style>
+
+<link href="../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for table of contents */
+
+.d-toc {
+  color: rgba(0,0,0,0.8);
+  font-size: 0.8em;
+  line-height: 1em;
+}
+
+.d-toc-header {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.3em;
+}
+
+.d-toc a {
+  border-bottom: none;
+}
+
+.d-toc ul {
+  padding-left: 0;
+}
+
+.d-toc li>ul {
+  padding-top: 0.8em;
+  padding-left: 16px;
+  margin-bottom: 0.6em;
+}
+
+.d-toc ul,
+.d-toc li {
+  list-style-type: none;
+}
+
+.d-toc li {
+  margin-bottom: 0.9em;
+}
+
+.d-toc-separator {
+  margin-top: 20px;
+  margin-bottom: 2em;
+}
+
+.d-article-with-toc {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+
+/* Tweak code blocks (note that this CSS is repeated above in an injection
+   into the d-code shadow dom) */
+
+d-code {
+  overflow-x: auto !important;
+}
+
+pre.d-code code.d-code {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+pre.text-output {
+
+  font-size: 12px;
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+@media(min-width: 768px) {
+
+d-code {
+  overflow-x: visible !important;
+}
+
+pre.d-code code.d-code  {
+    padding-left: 18px;
+    font-size: 14px;
+}
+pre.text-output {
+  font-size: 14px;
+}
+}
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // create d-bibliography
+  var bibliography = $('<d-bibliography></d-bibliography>');
+  $('#distill-bibliography').wrap(bibliography);
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace citations with <d-cite>
+  $('.citation').each(function(i, val) {
+    appendix = true;
+    var cites = $(this).attr('data-cites').split(" ");
+    var dt_cite = $('<d-cite></d-cite>');
+    dt_cite.attr('key', cites.join());
+    $(this).replaceWith(dt_cite);
+  });
+  // remove refs
+  $('#refs').remove();
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-toc a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // replace code blocks with d-code
+  $('pre>code').each(function(i, val) {
+    var code = $(this);
+    var pre = code.parent();
+    var clz = "";
+    var language = pre.attr('class');
+    if (language) {
+      // map unknown languages to "clike" (without this they just dissapear)
+      if ($.inArray(language, ["bash", "clike", "css", "go", "html",
+                               "javascript", "js", "julia", "lua", "markdown",
+                               "markup", "mathml", "python", "svg", "xml"]) == -1)
+        language = "clike";
+      language = ' language="' + language + '"';
+      var dt_code = $('<d-code block' + language + clz + '></d-code>');
+      dt_code.text(code.text());
+      pre.replaceWith(dt_code);
+    } else {
+      code.addClass('text-output').unwrap().changeElementType('pre');
+    }
+  });
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('d-code, pre.text-output, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // table of contents
+    if (have_authors) // adjust border if we are in authors
+      $('.d-toc').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
+    $('d-code').each(function(i, val) {
+      var style = document.createElement('style');
+      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
+      if (this.shadowRoot)
+        this.shadowRoot.appendChild(style);
+    });
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-toc-header').remove();
+  $('.d-toc').remove();
+  $('.d-toc-separator').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Wildcards in the Bash Shell","description":"CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time.","authors":[{"author":"Reagan Atchison","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-04-30T00:00:00.000-04:00","citationText":"Atchison, 2019"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../index.html" class="title">CSC405 Project Blog</a>
+</div>
+<div class="nav-right">
+<a href="../index.html">Home</a>
+<a href="../about.html">About</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Wildcards in the Bash Shell</h1>
+<p>CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard commands to use when you are using a large amount of files at one time.</p>
+</div>
+
+<div class="d-byline">
+  Reagan Atchison  
+  
+<br/>04-30-2019
+</div>
+
+<div class="d-article">
+<h2 id="introduction">Introduction</h2>
+<p>In this blog post, I have created a tutorial on how to perform basic wildcard commands in bash. I will be using a directory that includes subdirectories, and within those subdirectories there are files with random names. The file types include .R and .txt. I will be using wildcards in order to show how to find files that include certain characters, how to replace a character in file names to a different character, and more.</p>
+<p>Bash, also known as the “Bourne Again Shell” is a shell that allows a human to interact with a computer. Bash allows the user to communicate with the computer through command promtps and go through the computer’s memory to find and edit files. Included within bash, there are wildcards that allow a user to search and edit many different things at one time. In this tutorial, I will be showing basic ways to use these wildcards.</p>
+<p>To begin, you will need to run this code in order to create the directory used throughout this tutorial:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(stringr)
+if (dir.exists(&quot;myDir&quot;)) {
+  system(paste0(&quot;rm -rf myDir&quot;))
+}
+
+fruit2 &lt;-
+  fruit %&gt;% 
+  str_replace_all(pattern = &quot; &quot;, replacement = &quot;_&quot;)
+
+dir.create(&quot;mydir&quot;)
+for (i in 1:5) {
+  dirName &lt;- paste0(&quot;mydir/example&quot;, i)
+  dir.create(dirName)
+  for (letter in letters) {
+    file.create(paste0(dirName, &quot;/&quot;, &quot;file_&quot;, letter, &quot;.txt&quot;))
+  }
+  for (col in colors()) {
+    file.create(paste0(dirName, &quot;/&quot;, col, &quot;_&quot;, sample(fruit2, size = 1), &quot;.R&quot;))
+  }
+}</code></pre>
+</div>
+<p>Within this directory that has been created, five subdirectories will be created along with a lot of random files within them. This is the only code that you will need to run to follow along with this tutorial, yet results may vary because the files created are named at random.</p>
+<p>After you run the R script, you should see a new directory that has been created in your home directory called <code>mydir</code>. This is the directory that we will be using. The first command in all chunks will be changing the directory, and then the code to complete the process will be next.</p>
+<h2 id="tutorial">Tutorial</h2>
+<h3 id="the-asterisk-wildcard">The Asterisk Wildcard</h3>
+<p>One way you can search for different file names within a large directory is by using the * wildcard. The * wildcard allows a user to specify an amount of characters a filename should include, and the * allows the rest of the characters to be random. The example shown below allows a user to list all of the file names that start with “al” and can have any characters following it.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example1
+ls al*</code></pre>
+<pre><code>
+aliceblue_satsuma.R</code></pre>
+</div>
+<p>There is only one output from this specific directory, which is shown above. This means that there were no other instances when a file name started with “al.”</p>
+<h3 id="the-question-mark-wildcard">The Question Mark Wildcard</h3>
+<p>Let’s say that you wanted to look at a group of files under the same name, but maybe they all had a different, single character on the ending. In order to do this, you would not want to use the * wildcard. Instead, you would use the ? wildcard. While the * wildcard allows a file to have an unlimited number of characters after the *, the ? only searches for files that have one character following the ? wildcard. This is helpful in cases where you have different versions of a file, and you want to see all of the versions. I have shown an example of this below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example1
+ls file_?.txt</code></pre>
+<pre><code>
+file_a.txt
+file_b.txt
+file_c.txt
+file_d.txt
+file_e.txt
+file_f.txt
+file_g.txt
+file_h.txt
+file_i.txt
+file_j.txt
+file_k.txt
+file_l.txt
+file_m.txt
+file_n.txt
+file_o.txt
+file_p.txt
+file_q.txt
+file_r.txt
+file_s.txt
+file_t.txt
+file_u.txt
+file_v.txt
+file_w.txt
+file_x.txt
+file_y.txt
+file_z.txt</code></pre>
+</div>
+<p>In this example, the output shows us all the files that begin with “file_” and end with “.txt.” The ? wildcard is allowing that single character to be anything, and if the rest of the specified text is included in the same order, then it will be included in the output.</p>
+<h3 id="the-brackets-wildcards">The Brackets Wildcards</h3>
+<p>From the files shown above, maybe you only want to see the files that end with a letter that is in the first half of the alphabet.</p>
+<p>In order to do this, you will need to use the [ ] (brackets) wildcard, with the letters you would like to see within the brackets. I have shown an example below:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example1
+ls file_[a-m].txt</code></pre>
+<pre><code>
+file_a.txt
+file_b.txt
+file_c.txt
+file_d.txt
+file_e.txt
+file_f.txt
+file_g.txt
+file_h.txt
+file_i.txt
+file_j.txt
+file_k.txt
+file_l.txt
+file_m.txt</code></pre>
+</div>
+<p>By using this wildcard, we are able to see all files that end in a letter in the first half of the alphabet.</p>
+<p>You can also use brackets if you wanted to find files that have a range of numbers in them. In the example below, I wish to see all of the files that begin with “cadetblue” and have any of the numbers 1-3 following it, along with any characters that come after that:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example2
+ls cadetblue[1-3]*</code></pre>
+<pre><code>
+cadetblue1_lychee.R
+cadetblue2_loquat.R
+cadetblue3_persimmon.R</code></pre>
+</div>
+<p>The use of theses wildcards together let the computer know that I only wish to see the files that begin with “cadetblue” followed by one number in the range of 1-3, along with any characters that come after. The only specifications that I made in this command were that the file had to start with “cadetblue” and the number that comes after that must be within the range 1-3.</p>
+<p>Instead, maybe you would like to see all of files that start with “cadetblue” that do not have the number 1-3 following it. You can look at that too, by simply placing an exclamation point (!) before the first character in the range. I have shown an example below:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example2
+ls cadetblue[!1-3]*</code></pre>
+<pre><code>
+cadetblue4_raspberry.R
+cadetblue_blueberry.R</code></pre>
+</div>
+<p>The output shows us results in which there is not a 1-3 listed after the color. We see a 4 and we see no number, but we do not see any numbers within the range of 1-3.</p>
+<p>You can also do this with character that are not in sequence with each other. For example, maybe you only want to see the files that start with “file_” and end with either an a, c, x, or z. We can do that with brackets, as shown below:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example1
+ls file_[acxz].txt</code></pre>
+<pre><code>
+file_a.txt
+file_c.txt
+file_x.txt
+file_z.txt</code></pre>
+</div>
+<p>The output shows us the files that end in an a, c, x, or z. We can do this with capital letter aswell, but they would need to be included in the brackets as a separate letter.</p>
+<h3 id="the-cat-wildcard">The <code>cat</code> Wildcard</h3>
+<p>If you would like to see the contents of a file, you can do that with the <code>cat</code> wildcard. For example, if I were to type “hello” in my file titled “aliceblue_satsuma.R”, I could print that out by using <code>cat</code>. I have shown that example below:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example1
+cat aliceblue_satsuma.R</code></pre>
+<pre><code>
+hello</code></pre>
+</div>
+<p>Since there is only one line, and one word in this file, that is all it prints. I typed “hello” in this file, and the <code>cat</code> wildcard returns the input. If you would like, you can try this on your own machine by typing something into a file, and use the <code>cat</code> command followed by the filename to return what you typed.</p>
+<h3 id="renaming-multiple-files-at-one-time">Renaming Multiple Files at One Time</h3>
+<p>While I was not able to do this with a wildcard, I thought it would be important to include this in my tutorial. If you would like to change a lot of files to have a different name, this can be done with a for-loop. I have shown an example below of how a for-loop is structured in bash:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="bash"><code>
+cd ~/mydir/example3
+
+for i in turquoise*
+do
+    mv &quot;$i&quot; &quot;${i/turquoise/umbrella}&quot;
+done</code></pre>
+</div>
+<p>This for loop looks very similar to the for-loops in R. You have to tell bash to “do” whatever you want it to complete within the for-loop, and you have to tell bash when it can stop working by saying “done.” “mv” means to move the characters, in this case it is searching for the word “turquoise” in a filename, and then replacing it with the word “umbrella.” If we go through the file list, we can see that it worked and all the filenames with “turquoise” in it got changed to “umbrella.” If you wanted to change what files it looks for and what it changes it to, you would simply change those two words in the for-loop, within the “mv” command. Citation:(<a href="https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563" class="uri">https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563</a>)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In conclusion, wildcards play a very important role while using bash. Wildcards make using bash a lot easier, and much more simple. There are many more wildcards other than the ones that I have discussed here, but I have included most of the common ones.</p>
+<h2 id="references">References</h2>
+<p>Newham, Cameron, and Bill Rosenblatt. Learning the Bash Shell. OReilly, 2005.</p>
+<p><a href="https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563" class="uri">https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563</a></p>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

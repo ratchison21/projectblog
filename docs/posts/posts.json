@@ -1,18 +1,18 @@
 [
   {
-    "path": "posts/welcome/",
-    "title": "Welcome to CSC405 Project Blog",
-    "description": "Welcome to our new blog, CSC405 Project Blog. We hope you enjoy \nreading what we have to say!",
+    "path": "posts/",
+    "title": "Wildcards in the Bash Shell",
+    "description": "CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time.",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Reagan Atchison",
+        "url": {}
       }
     ],
-    "date": "2019-04-17",
+    "date": "2019-04-30",
     "categories": [],
     "preview": {},
-    "last_modified": "2019-04-17T13:09:56-04:00"
+    "last_modified": "2019-04-30T16:01:35-04:00"
   },
   {
     "path": "posts/2019-04-17-project-blog/",
@@ -27,6 +27,21 @@
     "date": "2019-04-17",
     "categories": [],
     "preview": {},
-    "last_modified": "2019-04-30T14:29:14-04:00"
+    "last_modified": "2019-04-30T14:29:15-04:00"
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to CSC405 Project Blog",
+    "description": "Welcome to our new blog, CSC405 Project Blog. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2019-04-17",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2019-04-24T13:10:00-04:00"
   }
 ]
