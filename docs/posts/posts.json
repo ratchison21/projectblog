@@ -12,22 +12,22 @@
     "date": "2019-04-30",
     "categories": [],
     "preview": {},
-    "last_modified": "2019-04-30T16:01:35-04:00"
+    "last_modified": "2019-05-02T22:50:36-04:00"
   },
   {
     "path": "posts/2019-04-17-project-blog/",
     "title": "Wildcards in the Bash Shell",
-    "description": "CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard commands to use when you are using a large amount of files at one time.",
+    "description": "CSC405 Project Online Tutorial. This tutorial will discuss some basic wildcard     commands to use when you are using a large amount of files at one time.",
     "author": [
       {
         "name": "Reagan Atchison",
         "url": {}
       }
     ],
-    "date": "2019-04-17",
+    "date": "2019-04-30",
     "categories": [],
     "preview": {},
-    "last_modified": "2019-04-30T14:29:15-04:00"
+    "last_modified": "2019-04-30T16:24:45-04:00"
   },
   {
     "path": "posts/welcome/",
