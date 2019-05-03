@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-In this blog post, I have created a tutorial on how to perform basic wildcard commands in bash. I will be using a directory that includes subdirectories, and within those subdirectories there are files with random names. The file types include .R and .txt. I will be using wildcards and simple functions in order to show how to find files that include certain characters, how to replace a character in file names to a different character, and more.
+In this blog post, I have created a tutorial on how to perform basic wildcard commands in bash. I will be using a directory that includes sub directories, and within those sub directories there are files with random names. The file types include .R and .txt. I will be using wildcards and simple functions in order to show how to find files that include certain characters, how to replace a character in file names to a different character, and more.
 
-Bash, also known as the "Bourne Again Shell" is a shell that allows a human to interact with a computer. Bash allows the user to communicate with the computer through command promtps and go through the computer's memory to find and edit files. Included within bash, there are wildcards that allow a user to search and edit many different things at one time. In this tutorial, I will be showing basic ways to use these wildcards.  
+Bash, also known as the "Bourne Again Shell" is a shell that allows a human to interact with a computer. Bash allows the user to communicate with the computer through command prompts and go through the computer's memory to find and edit files. Included within bash, there are wildcards that allow a user to search and edit many different things at one time. In this tutorial, I will be showing basic ways to use these wildcards.  
 
 To begin, you will need to run this code in order to create the directory used throughout this tutorial:
 
@@ -51,7 +51,7 @@ for (i in 1:5) {
 }
 ```
 
-Within this directory that has been created, five subdirectories will be created along with a lot of random files within them. This is the only code that you will need to run to follow along with this tutorial, and we should all get the same results since a seed has been set.
+Within this directory that has been created, five sub directories will be created along with a lot of random files within them. This is the only code that you will need to run to follow along with this tutorial, and we should all get the same results since a seed has been set.
 
 After you run the R script, you should see a new directory that has been created in your home directory called `myDir`. This is the directory that we will be using. The first command in all chunks will be changing the directory, and then the code to complete the process will be next.
 
@@ -59,7 +59,7 @@ After you run the R script, you should see a new directory that has been created
 
 ### The Asterisk Wildcard
 
-One way you can search for different file names within a large directory is by using the * wildcard. The * wildcard allows a user to specify an amount of characters a filename should include, and the * allows the rest of the characters to be random. The example shown below allows a user to list all of the file names that start with "al" and can have any characters following it.
+One way you can search for different file names within a large directory is by using the * wildcard. The * wildcard allows a user to specify an amount of characters a file name should include, and the * allows the rest of the characters to be random. The example shown below allows a user to list all of the file names that start with "al" and can have any characters following it.
 
 ```{bash}
 cd ~/myDir/example1
@@ -117,7 +117,7 @@ cd ~/myDir/example1
 ls file_[acxz].txt
 ```
 
-The output shows us the files that end in an a, c, x, or z. We can do this with capital letter aswell, but they would need to be included in the brackets as a separate letter.
+The output shows us the files that end in an a, c, x, or z. We can do this with capital letter as well, but they would need to be included in the brackets as a separate letter.
 
 ### The `cat` Function
 
@@ -128,7 +128,7 @@ cd ~/myDir/example1
 cat aliceblue_satsuma.R
 ```
 
-Since there is only one line, and one word in this file, that is all that it prints. I typed "hello" in this file, and the `cat` function returns the input. If you would like, you can try this on your own machine by typing something into a file, and use the `cat` command followed by the filename to return what you typed. 
+Since there is only one line, and one word in this file, that is all that it prints. I typed "hello" in this file, and the `cat` function returns the input. If you would like, you can try this on your own machine by typing something into a file, and use the `cat` command followed by the file name to return what you typed. 
 
 ### Renaming Multiple Files at One Time
 
@@ -143,8 +143,8 @@ do
 done
 ```
 
-This for loop looks very similar to the for-loops in R. You have to tell bash to  "do" whatever you want it to complete within the for-loop, and you have to tell bash when it can stop working by saying "done." "mv" means to move the characters, in this case it is searching for the word "turquoise" in a filename, and then replacing it with the word "umbrella." If we go through the file list, we can see that it worked and all the filenames with "turquoise" in it got changed to "umbrella." If you wanted to change what files it looks for and what it changes it to, you would simply change those two words in the for-loop, within the "mv" command. 
-Citation:(https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563)
+This for loop looks very similar to the for-loops in R. You have to tell bash to  "do" whatever you want it to complete within the for-loop, and you have to tell bash when it can stop working by saying "done." "mv" means to move the characters, in this case it is searching for the word "turquoise" in a file name, and then replacing it with the word "umbrella." If we go through the file list, we can see that it worked and all the file names with "turquoise" in it got changed to "umbrella." If you wanted to change what files it looks for and what it changes it to, you would simply change those two words in the for-loop, within the "mv" command. 
+Citation:(https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-file name-in-bash/20657563)
 
 
 
@@ -156,4 +156,4 @@ In conclusion, wildcards play a very important role while using bash. Wildcards 
 
 Newham, Cameron, and Bill Rosenblatt. Learning the Bash Shell. OReilly, 2005.
 
-https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-filename-in-bash/20657563
+https://stackoverflow.com/questions/20657432/rename-multiple-files-but-only-rename-part-of-the-file name-in-bash/20657563
